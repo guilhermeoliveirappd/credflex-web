@@ -32,7 +32,7 @@ export function PhotoSlot({
     );
   }
   const bg =
-    tone === "navy" ? "bg-navy-800 text-navy-300" : tone === "gold" ? "bg-gold-300 text-navy-900" : "bg-sand text-stone";
+    tone === "navy" ? "bg-brand-800 text-brand-300" : tone === "gold" ? "bg-accent-300 text-brand-900" : "bg-sand text-stone";
   return (
     <div className={`relative overflow-hidden ${bg} ${className}`} role="img" aria-label={`Espaço reservado para fotografia: ${alt}`}>
       <div
@@ -41,8 +41,8 @@ export function PhotoSlot({
         style={{ backgroundImage: "repeating-linear-gradient(-35deg, transparent 0 13px, color-mix(in srgb, currentColor 22%, transparent) 13px 14px)" }}
       />
       {showReviewMarkers && (
-        <div className="absolute inset-x-3 top-3 rounded-[4px] bg-black/55 px-3 py-2 text-[0.78rem] leading-snug text-white backdrop-blur-[2px]">
-          <strong className="block text-[0.68rem] uppercase tracking-[0.12em] text-gold-300">Foto real a receber</strong>
+        <div className="absolute right-3 top-3 max-w-[min(78%,360px)] rounded-[4px] bg-black/55 px-3 py-2 text-[0.78rem] leading-snug text-white backdrop-blur-[2px]">
+          <strong className="block text-[0.68rem] uppercase tracking-[0.12em] text-accent-300">Foto real a receber</strong>
           {brief}
         </div>
       )}

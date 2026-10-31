@@ -77,16 +77,16 @@ export function CareersForm() {
       </div>
       <div>
         <span className="field-label" id="resume-label">Currículo (PDF, até 5 MB)</span>
-        <label className={`flex min-h-[72px] cursor-pointer items-center gap-4 rounded-[var(--radius-sm)] border-[1.5px] border-dashed px-4 hover:border-navy-500 has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-navy-700 ${fe.resume ? "border-error" : "border-sand-600"}`}>
-          <Upload aria-hidden className="h-5 w-5 flex-none text-navy-700" />
-          <span className="font-semibold text-navy-900">{fileName || "Escolher arquivo"}</span>
+        <label className={`flex min-h-[72px] cursor-pointer items-center gap-4 rounded-[var(--radius-sm)] border-[1.5px] border-dashed px-4 hover:border-brand-500 has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-brand-700 ${fe.resume ? "border-error" : "border-sand-600"}`}>
+          <Upload aria-hidden className="h-5 w-5 flex-none text-brand-700" />
+          <span className="font-semibold text-brand-900">{fileName || "Escolher arquivo"}</span>
           <input type="file" name="resume" accept="application/pdf,.pdf" aria-labelledby="resume-label" aria-describedby={fe.resume ? "resume-err" : undefined} className="sr-only" onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")} />
         </label>
         {err("resume")}
       </div>
       <label className="flex cursor-pointer items-start gap-3">
-        <input type="checkbox" name="consent" value="true" className="mt-1 h-5 w-5 flex-none accent-navy-800" aria-describedby={fe.consent ? "consent-err" : undefined} />
-        <span className="text-[0.97rem]">Autorizo a CredFlex a usar meus dados e currículo exclusivamente para processos seletivos, conforme a <Link href="/politica-de-privacidade" className="font-semibold text-navy-700 underline">Política de Privacidade</Link>.</span>
+        <input type="checkbox" name="consent" value="true" className="mt-1 h-5 w-5 flex-none accent-brand-800" aria-describedby={fe.consent ? "consent-err" : undefined} />
+        <span className="text-[0.97rem]">Autorizo a CredFlex a usar meus dados e currículo exclusivamente para processos seletivos, conforme a <Link href="/politica-de-privacidade" className="font-semibold text-brand-700 underline">Política de Privacidade</Link>.</span>
       </label>
       {err("consent")}
       {state.kind === "error" && <p role="alert" className="font-semibold text-error">{state.message}</p>}

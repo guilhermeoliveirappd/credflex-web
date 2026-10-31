@@ -26,7 +26,7 @@ export function WhatsAppCTA({
   href?: string | null;
   location: string;
   label?: string;
-  variant?: "ghost" | "primary" | "navy";
+  variant?: "ghost" | "primary" | "brand";
   className?: string;
 }) {
   const url = href ?? buildWhatsappUrl({ product, protocol });

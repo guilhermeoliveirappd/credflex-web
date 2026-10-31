@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { ProfileGlyph } from "@/components/ui/ProfileGlyph";
-import { Eyebrow } from "@/components/ui/SectionHeading";
 import { profileOptions, type ProfileOption } from "@/content/profiles";
 import { products } from "@/content/products";
 import { track } from "@/lib/analytics/events";
@@ -17,14 +16,14 @@ function NextStep({ option, compact = false }: { option: ProfileOption | null; c
   if (!option) {
     return (
       <div className="border-l-2 border-white/15 pl-5">
-        <p className="text-navy-300">Selecione a situação mais parecida com a sua para ver o próximo passo.</p>
+        <p className="text-brand-300">Selecione a situação mais parecida com a sua para ver o próximo passo.</p>
       </div>
     );
   }
   const product = option.product ? products[option.product] : null;
   return (
-    <div className={compact ? "" : "border-l-2 border-gold-400 pl-5"} aria-live="polite">
-      <p className="t-eyebrow text-gold-300">O que acontece agora</p>
+    <div className={compact ? "" : "border-l-2 border-accent-400 pl-5"} aria-live="polite">
+      <p className="font-bold text-accent-300">O que acontece agora</p>
       <p className="mt-2 text-[1.05rem] leading-relaxed text-white">{option.next}</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <Link
@@ -36,7 +35,7 @@ function NextStep({ option, compact = false }: { option: ProfileOption | null; c
           <ArrowRight aria-hidden className="btn-arrow h-5 w-5" />
         </Link>
         {product && (
-          <Link href={`/${product.slug}`} className="link-arrow min-h-11 text-gold-300">
+          <Link href={`/${product.slug}`} className="link-arrow min-h-11 text-accent-300">
             Conhecer {product.name}
           </Link>
         )}
@@ -68,16 +67,15 @@ export function ProfileSelector() {
   const focusIndex = Math.max(0, profileOptions.findIndex((o) => o.id === selected));
 
   return (
-    <section id="perfil" aria-labelledby="perfil-title" className="relative bg-navy-950 py-[var(--section-y)] text-white">
+    <section id="perfil" aria-labelledby="perfil-title" className="relative bg-brand-950 py-[var(--section-y)] text-white">
       <div aria-hidden className="grain absolute inset-0 opacity-50" />
       <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-[calc(var(--header-h)+40px)]">
-            <Eyebrow tone="light">Por onde começar</Eyebrow>
-            <h2 id="perfil-title" className="t-h2 mt-5 text-white">
+            <h2 id="perfil-title" className="t-h2 text-white">
               Qual dessas opções combina com você?
             </h2>
-            <p className="t-lead mt-5 max-w-[40ch] text-navy-100">
+            <p className="t-lead mt-5 max-w-[40ch] text-brand-100">
               Cada modalidade tem regras próprias. Escolher o caminho certo desde o início evita perguntas desnecessárias.
             </p>
             <div className="mt-10 hidden lg:block">
@@ -91,8 +89,8 @@ export function ProfileSelector() {
             {profileOptions.map((o, i) => {
               const isSel = o.id === selected;
               return (
-                <div key={o.id} className={`relative transition-colors duration-300 ${isSel ? "bg-navy-900" : ""}`}>
-                  <span aria-hidden className={`absolute inset-y-0 left-0 w-[3px] origin-top bg-gold-400 transition-transform duration-300 ${isSel ? "scale-y-100" : "scale-y-0"}`} />
+                <div key={o.id} className={`relative transition-colors duration-300 ${isSel ? "bg-brand-900" : ""}`}>
+                  <span aria-hidden className={`absolute inset-y-0 left-0 w-[3px] origin-top bg-accent-400 transition-transform duration-300 ${isSel ? "scale-y-100" : "scale-y-0"}`} />
                   <button
                     ref={(el) => {
                       refs.current[i] = el;
@@ -107,26 +105,26 @@ export function ProfileSelector() {
                   >
                     <span
                       className={`flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] border transition-colors duration-300 ${
-                        isSel ? "border-gold-400 bg-gold-400 text-navy-950" : "border-white/20 text-gold-300 group-hover:border-gold-400/70"
+                        isSel ? "border-accent-400 bg-accent-400 text-brand-950" : "border-white/20 text-accent-300 group-hover:border-accent-400/70"
                       }`}
                     >
                       <ProfileGlyph icon={o.icon} />
                     </span>
                     <span>
                       <span className="flex items-baseline gap-3">
-                        <span aria-hidden className="t-num text-[0.78rem] font-bold text-navy-300">
+                        <span aria-hidden className="t-num text-[0.78rem] font-bold text-brand-300">
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <span className={`text-[1.1rem] font-bold leading-snug sm:text-[1.2rem] ${isSel ? "text-white" : "text-navy-100 group-hover:text-white"}`}>
+                        <span className={`text-[1.1rem] font-bold leading-snug sm:text-[1.2rem] ${isSel ? "text-white" : "text-brand-100 group-hover:text-white"}`}>
                           {o.label}
                         </span>
                       </span>
-                      <span className="mt-1.5 block pl-8 text-[0.97rem] leading-relaxed text-navy-300">{o.explanation}</span>
+                      <span className="mt-1.5 block pl-8 text-[0.97rem] leading-relaxed text-brand-300">{o.explanation}</span>
                     </span>
                     <span
                       aria-hidden
                       className={`mt-1 flex h-7 w-7 items-center justify-center rounded-full border-2 transition-all duration-300 ${
-                        isSel ? "border-gold-400 bg-gold-400 text-navy-950" : "border-white/30 text-transparent group-hover:border-white/60"
+                        isSel ? "border-accent-400 bg-accent-400 text-brand-950" : "border-white/30 text-transparent group-hover:border-white/60"
                       }`}
                     >
                       <Check className="h-4 w-4" strokeWidth={3} />

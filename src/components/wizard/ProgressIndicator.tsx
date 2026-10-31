@@ -9,9 +9,9 @@ export function ProgressIndicator({ steps, current }: { steps: StepMeta[]; curre
     <div>
       <p className="t-small flex items-baseline justify-between gap-4 text-stone">
         <span>
-          Etapa <span className="t-num font-bold text-navy-900">{current + 1}</span> de <span className="t-num">{steps.length}</span>
+          Etapa <span className="t-num font-bold text-brand-900">{current + 1}</span> de <span className="t-num">{steps.length}</span>
         </span>
-        <span className="font-semibold text-navy-900">{steps[current]?.label}</span>
+        <span className="font-semibold text-brand-900">{steps[current]?.label}</span>
       </p>
       <ol className="mt-3 flex gap-1.5" aria-label="Progresso da pré-análise">
         {steps.map((s, i) => (
@@ -22,8 +22,8 @@ export function ProgressIndicator({ steps, current }: { steps: StepMeta[]; curre
             </span>
             <span aria-hidden className="block h-[5px] overflow-hidden rounded-[2px] bg-sand">
               <span
-                className={`block h-full origin-left bg-navy-800 transition-transform duration-500 ease-[var(--ease-out)] ${
-                  i < current ? "scale-x-100" : i === current ? "scale-x-50 !bg-gold-400" : "scale-x-0"
+                className={`block h-full origin-left bg-brand-800 transition-transform duration-500 ease-[var(--ease-out)] ${
+                  i < current ? "scale-x-100" : i === current ? "scale-x-50 !bg-accent-400" : "scale-x-0"
                 }`}
               />
             </span>

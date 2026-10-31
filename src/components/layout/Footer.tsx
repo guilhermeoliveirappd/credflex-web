@@ -9,18 +9,18 @@ import { formatPhoneDisplay, site } from "@/content/site";
 export function Footer() {
   const { channels, legal, location } = site;
   return (
-    <footer className="bg-navy-950 text-navy-100">
+    <footer className="bg-brand-950 text-brand-100">
       <div className="container-x grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="md:col-span-4">
           <Logo tone="light" />
-          <p className="mt-5 max-w-sm text-navy-300">
+          <p className="mt-5 max-w-sm text-brand-300">
             Correspondente bancário em {location.city}/{location.state}. Atendimento humano para você entender cada
             modalidade antes de decidir. <ReviewMark note="Papel institucional e redação a validar." />
           </p>
         </div>
 
         <nav aria-label="Modalidades" className="md:col-span-3">
-          <p className="t-eyebrow mb-4 text-gold-300">Modalidades</p>
+          <p className="t-eyebrow mb-4 text-accent-300">Modalidades</p>
           <ul className="space-y-2.5">
             {activeProducts.map((p) => (
               <li key={p.slug}>
@@ -33,7 +33,7 @@ export function Footer() {
         </nav>
 
         <nav aria-label="Institucional" className="md:col-span-2">
-          <p className="t-eyebrow mb-4 text-gold-300">CredFlex</p>
+          <p className="t-eyebrow mb-4 text-accent-300">CredFlex</p>
           <ul className="space-y-2.5">
             {mainNav.map((i) => (
               <li key={i.href}>
@@ -51,7 +51,7 @@ export function Footer() {
         </nav>
 
         <div className="md:col-span-3">
-          <p className="t-eyebrow mb-4 text-gold-300">Canais oficiais</p>
+          <p className="t-eyebrow mb-4 text-accent-300">Canais oficiais</p>
           <ul className="space-y-2.5">
             {channels.whatsapp && <li>WhatsApp: {formatPhoneDisplay(channels.whatsapp)}</li>}
             {channels.phone && <li>Telefone: {formatPhoneDisplay(channels.phone)}</li>}
@@ -65,18 +65,18 @@ export function Footer() {
             {!channels.whatsapp && !channels.phone && !channels.email && (
               <li>
                 <ReviewMark note="Nenhum canal oficial confirmado. O site antigo exibia números divergentes." />{" "}
-                <span className="text-navy-300">Canais em confirmação.</span>
+                <span className="text-brand-300">Canais em confirmação.</span>
               </li>
             )}
           </ul>
-          <Link href="/seguranca" className="link-arrow mt-5 text-gold-300">
+          <Link href="/seguranca" className="link-arrow mt-5 text-accent-300">
             Como reconhecer nossos canais
           </Link>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-x space-y-4 py-8 text-[0.86rem] leading-relaxed text-navy-300">
+        <div className="container-x space-y-4 py-8 text-[0.86rem] leading-relaxed text-brand-300">
           <p>
             A CredFlex atua como correspondente bancário, intermediando produtos de instituições financeiras parceiras.
             Toda contratação depende de análise e aprovação de crédito pela instituição. Taxas, prazos e Custo Efetivo

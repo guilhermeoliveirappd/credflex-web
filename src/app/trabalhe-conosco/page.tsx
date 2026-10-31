@@ -12,11 +12,11 @@ export const metadata: Metadata = pageMetadata({
 export default function Page() {
   return (
     <>
-      <PageHero eyebrow="Carreiras" crumb="Trabalhe conosco" path="/trabalhe-conosco" title="Venha atender gente de verdade." lead="Procuramos pessoas que gostam de explicar com paciência e tratar cada cliente com respeito." />
+      <PageHero crumb="Trabalhe conosco" path="/trabalhe-conosco" title="Venha atender gente de verdade." lead="Procuramos pessoas que gostam de explicar com paciência e tratar cada cliente com respeito." />
       <section className="bg-paper pb-[var(--section-y)]">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <h2 className="t-h3 text-navy-950">Como funciona</h2>
+            <h2 className="t-h3 text-brand-950">Como funciona</h2>
             <p className="mt-3 text-ink-2">Envie seu currículo em PDF. Ele será usado somente em processos seletivos da CredFlex e não é compartilhado com terceiros.</p>
           </div>
           <div className="lg:col-span-7 lg:col-start-6"><CareersForm /></div>

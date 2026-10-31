@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Lock, UserRound } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { OfficialChannelNotice } from "@/components/ui/OfficialChannelNotice";
-import { Eyebrow } from "@/components/ui/SectionHeading";
 import { CreditPrequalificationWizard } from "@/components/wizard/CreditPrequalificationWizard";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -21,8 +20,7 @@ export default async function SimulacaoPage({ searchParams }: { searchParams: Pr
         <aside className="lg:col-span-4 lg:pt-4">
           <Breadcrumbs items={[{ name: "Pré-análise", path: "/simulacao" }]} />
           <div className="mt-8">
-            <Eyebrow>Pré-análise</Eyebrow>
-            <h1 className="t-h2 mt-5 text-navy-950">Vamos entender o seu caso.</h1>
+            <h1 className="t-h2 text-brand-950">Vamos entender o seu caso.</h1>
             <p className="t-lead mt-5 text-ink-2">
               Poucas perguntas, sem documentos. No fim, uma pessoa da equipe retorna com as possibilidades e os próximos
               passos.
@@ -30,14 +28,14 @@ export default async function SimulacaoPage({ searchParams }: { searchParams: Pr
           </div>
           <ul className="mt-8 hidden space-y-5 border-t border-sand pt-8 lg:block">
             <li className="flex gap-3">
-              <UserRound aria-hidden className="mt-0.5 h-5 w-5 flex-none text-navy-700" />
+              <UserRound aria-hidden className="mt-0.5 h-5 w-5 flex-none text-brand-700" />
               <span className="text-ink-2">
-                <strong className="text-navy-950">Isto não é uma simulação de parcelas.</strong> Taxas e valores só existem
+                <strong className="text-brand-950">Isto não é uma simulação de parcelas.</strong> Taxas e valores só existem
                 depois da análise da instituição parceira — e chegam a você por escrito.
               </span>
             </li>
             <li className="flex gap-3">
-              <Lock aria-hidden className="mt-0.5 h-5 w-5 flex-none text-navy-700" />
+              <Lock aria-hidden className="mt-0.5 h-5 w-5 flex-none text-brand-700" />
               <span className="text-ink-2">
                 Suas respostas ficam guardadas apenas neste navegador até o envio. Nome e WhatsApp não são salvos no
                 rascunho.

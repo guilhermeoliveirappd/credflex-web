@@ -70,24 +70,24 @@ export function CookieConsent() {
           className="fixed inset-x-0 bottom-0 z-[60] border-t border-sand bg-white shadow-[0_-12px_40px_-20px_rgb(8_20_40/0.35)] sm:inset-x-auto sm:bottom-4 sm:left-4 sm:max-w-[440px] sm:rounded-md sm:border"
         >
           <div className="p-5">
-            <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-navy-900">Sua privacidade, sua escolha</p>
+            <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-brand-900">Sua privacidade, sua escolha</p>
             <p className="t-small mt-2 text-ink-2">
               Usamos cookies necessários para o site funcionar. Com a sua permissão, também usamos cookies de medição e
               de publicidade. Nada além do necessário é ativado antes da sua escolha.{" "}
-              <Link href="/politica-de-cookies" className="font-semibold text-navy-700 underline">
+              <Link href="/politica-de-cookies" className="font-semibold text-brand-700 underline">
                 Política de cookies
               </Link>
             </p>
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <button type="button" className="btn btn-navy min-h-11 text-[0.95rem]" onClick={() => save({ analytics: true, marketing: true })}>
+              <button type="button" className="btn btn-brand min-h-11 text-[0.95rem]" onClick={() => save({ analytics: true, marketing: true })}>
                 Aceitar
               </button>
-              <button type="button" className="btn btn-ghost min-h-11 text-[0.95rem] text-navy-900" onClick={() => save({ analytics: false, marketing: false })}>
+              <button type="button" className="btn btn-ghost min-h-11 text-[0.95rem] text-brand-900" onClick={() => save({ analytics: false, marketing: false })}>
                 Recusar
               </button>
               <button
                 type="button"
-                className="col-span-2 min-h-11 rounded-sm text-[0.95rem] font-semibold text-navy-700 underline hover:bg-paper-2"
+                className="col-span-2 min-h-11 rounded-sm text-[0.95rem] font-semibold text-brand-700 underline hover:bg-paper-2"
                 onClick={() => setPrefsOpen(true)}
               >
                 Configurar preferências
@@ -149,11 +149,11 @@ export function CookiePreferences({
         e.preventDefault();
         onClose();
       }}
-      className="m-auto w-[min(560px,calc(100vw-2rem))] rounded-md border border-sand bg-white p-0 text-ink backdrop:bg-navy-950/50"
+      className="m-auto w-[min(560px,calc(100vw-2rem))] rounded-md border border-sand bg-white p-0 text-ink backdrop:bg-brand-950/50"
     >
       <div className="flex items-start justify-between gap-4 border-b border-sand p-5">
         <div>
-          <h2 id="cookie-prefs-title" className="t-h3 text-navy-900">
+          <h2 id="cookie-prefs-title" className="t-h3 text-brand-900">
             Preferências de cookies
           </h2>
           <p className="t-small mt-1 text-stone">Você pode mudar isso a qualquer momento pelo rodapé do site.</p>
@@ -169,7 +169,7 @@ export function CookiePreferences({
           return (
             <li key={c.id} className="flex items-start justify-between gap-5 p-5">
               <div>
-                <label htmlFor={`cookie-${c.id}`} className="font-bold text-navy-900">
+                <label htmlFor={`cookie-${c.id}`} className="font-bold text-brand-900">
                   {c.title}
                 </label>
                 <p id={`cookie-${c.id}-desc`} className="t-small mt-1 text-ink-2">
@@ -185,7 +185,7 @@ export function CookiePreferences({
                 disabled={c.locked}
                 onClick={() => !c.locked && setChoice((s) => ({ ...s, [c.id]: !s[c.id as keyof ConsentChoice] }))}
                 className={`relative mt-1 h-8 w-14 flex-none rounded-full transition-colors disabled:cursor-not-allowed ${
-                  checked ? "bg-navy-800" : "bg-sand-600"
+                  checked ? "bg-brand-800" : "bg-sand-600"
                 } ${c.locked ? "opacity-60" : ""}`}
               >
                 <span
@@ -199,13 +199,13 @@ export function CookiePreferences({
         })}
       </ul>
       <div className="grid gap-2 border-t border-sand p-5 sm:grid-cols-3">
-        <button type="button" className="btn btn-ghost min-h-11 text-[0.95rem] text-navy-900" onClick={() => onSave({ analytics: false, marketing: false })}>
+        <button type="button" className="btn btn-ghost min-h-11 text-[0.95rem] text-brand-900" onClick={() => onSave({ analytics: false, marketing: false })}>
           Recusar todos
         </button>
-        <button type="button" className="btn btn-ghost min-h-11 text-[0.95rem] text-navy-900" onClick={() => onSave({ analytics: true, marketing: true })}>
+        <button type="button" className="btn btn-ghost min-h-11 text-[0.95rem] text-brand-900" onClick={() => onSave({ analytics: true, marketing: true })}>
           Aceitar todos
         </button>
-        <button type="button" className="btn btn-navy min-h-11 text-[0.95rem]" onClick={() => onSave(choice)}>
+        <button type="button" className="btn btn-brand min-h-11 text-[0.95rem]" onClick={() => onSave(choice)}>
           Salvar escolhas
         </button>
       </div>

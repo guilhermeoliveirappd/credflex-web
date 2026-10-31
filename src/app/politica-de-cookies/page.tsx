@@ -25,7 +25,7 @@ export default function Page() {
           ),
         },
         { id: "armazenamento-local", title: "Armazenamento na sessão", body: <p>O formulário de pré-análise guarda as respostas não identificáveis na sessão do navegador (sessionStorage) para você não perder o progresso. Nome e WhatsApp não são guardados nesse rascunho.</p> },
-        { id: "gerenciar", title: "Como gerenciar", body: <p>Você pode rever sua escolha a qualquer momento: <CookiePreferencesButton className="font-semibold text-navy-700 underline" />.</p> },
+        { id: "gerenciar", title: "Como gerenciar", body: <p>Você pode rever sua escolha a qualquer momento: <CookiePreferencesButton className="font-semibold text-brand-700 underline" />.</p> },
       ]}
     />
   );

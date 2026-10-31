@@ -30,16 +30,15 @@ export function TransparencyBlock() {
         <div className="lg:col-span-5">
           <SectionHeading
             id="transparencia-title"
-            eyebrow="Transparência"
             title="O que a CredFlex é — e o que não é."
             lead="Crédito exige informação clara. Por isso explicamos o nosso papel antes de qualquer conversa sobre valores."
           />
-          <div className="mt-10 rounded-[var(--radius-md)] border border-navy-100 bg-white p-6">
-            <p className="font-bold text-navy-950">Antes de assinar qualquer proposta, peça por escrito:</p>
+          <div className="mt-10 rounded-[var(--radius-md)] bg-paper-2 p-6">
+            <p className="font-bold text-brand-950">Antes de assinar qualquer proposta, peça por escrito:</p>
             <ul className="mt-4 space-y-2.5">
               {checklist.map((c) => (
                 <li key={c} className="flex items-start gap-3 text-ink-2">
-                  <span aria-hidden className="mt-[0.6em] h-[2px] w-3 flex-none bg-gold-500" />
+                  <span aria-hidden className="mt-[0.6em] h-[2px] w-3 flex-none bg-accent-500" />
                   {c}
                 </li>
               ))}
@@ -50,11 +49,11 @@ export function TransparencyBlock() {
           <ol className="divide-y divide-sand border-y border-sand">
             {topics.map((t, i) => (
               <li key={t.title} className="grid gap-2 py-7 sm:grid-cols-[3rem_1fr]">
-                <span aria-hidden className="t-num text-[0.85rem] font-bold text-navy-500 sm:pt-1">
+                <span aria-hidden className="t-num text-[0.85rem] font-bold text-brand-500 sm:pt-1">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="t-h3 text-navy-950">{t.title}</h3>
+                  <h3 className="t-h3 text-brand-950">{t.title}</h3>
                   <p className="mt-2 text-ink-2">{t.text}</p>
                 </div>
               </li>
@@ -63,7 +62,7 @@ export function TransparencyBlock() {
           <p className="t-small mt-6 text-stone">
             <ReviewMark note="Redação regulatória e lista de instituições parceiras pendentes de validação jurídica." /> Instituições
             parceiras serão listadas aqui após confirmação.{" "}
-            <Link href="/seguranca" className="font-semibold text-navy-700 underline">
+            <Link href="/seguranca" className="font-semibold text-brand-700 underline">
               Como identificar os canais oficiais
             </Link>
           </p>

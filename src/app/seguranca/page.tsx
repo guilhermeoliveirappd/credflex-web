@@ -34,42 +34,42 @@ export default function SegurancaPage() {
   ].filter(Boolean) as [string, string][];
   return (
     <>
-      <PageHero tone="navy" eyebrow="Segurança" crumb="Segurança" path="/seguranca" title={site.antiFraudMessage} lead="Golpes com falsas ofertas de crédito são comuns. Estas orientações ajudam você a reconhecer o contato legítimo." />
+      <PageHero tone="navy" crumb="Segurança" path="/seguranca" title={site.antiFraudMessage} lead="Golpes com falsas ofertas de crédito são comuns. Estas orientações ajudam você a reconhecer o contato legítimo." />
       <section aria-labelledby="nunca-title" className="bg-paper py-[var(--section-y)]">
         <div className="container-x grid gap-14 lg:grid-cols-2">
           <div>
-            <SectionHeading id="nunca-title" eyebrow="A CredFlex nunca pede" title="Se pedirem isto, não é a gente." />
+            <SectionHeading id="nunca-title" title="Se pedirem isto, não é a gente." />
             <ul className="mt-10 space-y-6">
               {never.map(({ icon: I, t, d }) => (
                 <li key={t} className="flex gap-4">
                   <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[var(--radius-sm)] bg-error-bg text-error"><I aria-hidden className="h-5 w-5" /></span>
-                  <span><span className="block font-bold text-navy-950">{t}</span><span className="text-ink-2">{d}</span></span>
+                  <span><span className="block font-bold text-brand-950">{t}</span><span className="text-ink-2">{d}</span></span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <SectionHeading eyebrow="O que fazer" title="Três hábitos que protegem você." />
+            <SectionHeading title="Três hábitos que protegem você." />
             <ul className="mt-10 space-y-6">
               {doThis.map(({ icon: I, t, d }) => (
                 <li key={t} className="flex gap-4">
                   <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[var(--radius-sm)] bg-ok-bg text-ok"><I aria-hidden className="h-5 w-5" /></span>
-                  <span><span className="block font-bold text-navy-950">{t}</span><span className="text-ink-2">{d}</span></span>
+                  <span><span className="block font-bold text-brand-950">{t}</span><span className="text-ink-2">{d}</span></span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </section>
-      <section id="canais" aria-labelledby="canais-title" className="bg-paper-2 py-[var(--section-y)]">
+      <section id="canais" aria-labelledby="canais-title" className="bg-accent-400 py-[var(--section-y)] text-brand-950">
         <div className="container-x max-w-4xl">
-          <SectionHeading id="canais-title" eyebrow="Canais oficiais" title="Estes são os únicos canais da CredFlex." />
+          <SectionHeading id="canais-title" title="Estes são os únicos canais da CredFlex." />
           {list.length ? (
-            <dl className="mt-10 divide-y divide-sand border-y border-sand">
+            <dl className="mt-10 divide-y divide-brand-900/25 border-y border-brand-900/25">
               {list.map(([k, v]) => (
                 <div key={k} className="grid gap-1 py-5 sm:grid-cols-[12rem_1fr]">
-                  <dt className="t-small text-stone">{k}</dt>
-                  <dd className="t-num text-xl font-bold text-navy-950">{v}</dd>
+                  <dt className="t-small font-semibold text-brand-950">{k}</dt>
+                  <dd className="t-num text-xl font-bold text-brand-950">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -78,7 +78,7 @@ export default function SegurancaPage() {
               <ReviewMark note="Bloqueante para publicação: o site antigo exibia números diferentes; definir canais oficiais únicos." /> A lista de canais oficiais será publicada após confirmação.
             </p>
           )}
-          <p className="mt-8 text-ink-2">
+          <p className="mt-8 text-brand-950">
             Se você recebeu um contato suspeito em nome da CredFlex, não forneça dados e avise a nossa equipe pelos canais
             acima. Em caso de golpe, registre boletim de ocorrência e comunique o seu banco.
           </p>

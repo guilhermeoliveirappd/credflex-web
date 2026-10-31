@@ -5,7 +5,7 @@
  */
 export function CFPath({
   className = "",
-  stroke = "var(--color-gold-400)",
+  stroke = "var(--color-accent-400)",
   animate = false,
   weight = 2,
 }: {

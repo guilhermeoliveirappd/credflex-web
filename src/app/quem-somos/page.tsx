@@ -27,7 +27,6 @@ export default function QuemSomosPage() {
   return (
     <>
       <PageHero
-        eyebrow="Quem somos"
         crumb="Quem somos"
         path="/quem-somos"
         title="Uma empresa do interior paulista, com gente de verdade atendendo."
@@ -39,7 +38,7 @@ export default function QuemSomosPage() {
           </>
         }
       />
-      <section aria-labelledby="historia-title" className="bg-paper-2 py-[var(--section-y)]">
+      <section aria-labelledby="historia-title" className="bg-white py-[var(--section-y)]">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <PhotoSlot
@@ -49,7 +48,7 @@ export default function QuemSomosPage() {
             />
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
-            <SectionHeading id="historia-title" eyebrow="Trajetória" title="Nossa história" />
+            <SectionHeading id="historia-title" title="Nossa história" />
             <p className="mt-6 text-ink-2">
               O texto da história institucional será escrito com a CredFlex a partir de informações confirmadas: fundação,
               pessoas, marcos e modalidades. <ReviewMark note="Aguardando entrevista/briefing institucional." />
@@ -60,23 +59,23 @@ export default function QuemSomosPage() {
           </div>
         </div>
       </section>
-      <section aria-labelledby="principios-title" className="bg-paper py-[var(--section-y)]">
+      <section aria-labelledby="principios-title" className="bg-brand-900 py-[var(--section-y)] text-white">
         <div className="container-x">
-          <SectionHeading id="principios-title" eyebrow="Como trabalhamos" title="Três compromissos que orientam o atendimento." className="max-w-3xl" />
+          <SectionHeading id="principios-title" tone="light" title="Três compromissos que orientam o atendimento." className="max-w-3xl" />
           <ol className="mt-12 grid gap-4 md:grid-cols-3">
             {principles.map(([t, d], i) => (
-              <li key={t} className="border-t-2 border-navy-900 pt-6">
-                <span className="t-num text-[0.85rem] font-bold text-navy-500">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="t-h3 mt-3 text-navy-950">{t}</h3>
-                <p className="mt-3 text-ink-2">{d}</p>
+              <li key={t} className="border-t-2 border-accent-400 pt-6">
+                <span className="t-num text-[0.85rem] font-bold text-accent-300">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="t-h3 mt-3 text-white">{t}</h3>
+                <p className="mt-3 text-brand-100">{d}</p>
               </li>
             ))}
           </ol>
-          <p className="t-small mt-6 text-stone">
+          <p className="t-small mt-6 text-brand-100">
             <ReviewMark note="Compromissos propostos; validar com a direção da CredFlex." />
           </p>
           <div className="mt-16 rounded-[var(--radius-md)] bg-white p-7 ring-1 ring-sand sm:p-9">
-            <h2 className="t-h3 text-navy-950">O papel de correspondente bancário</h2>
+            <h2 className="t-h3 text-brand-950">O papel de correspondente bancário</h2>
             <ul className="mt-5 space-y-3 text-ink-2">
               {roleFacts.map((f) => (
                 <li key={f.text}>

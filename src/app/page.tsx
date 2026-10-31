@@ -36,8 +36,8 @@ export default function HomePage() {
       <section aria-labelledby="faq-title" className="bg-paper py-[var(--section-y)]">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionHeading id="faq-title" eyebrow="Dúvidas frequentes" title="Perguntas que todo mundo deveria fazer." />
-            <Link href="/ajuda" className="link-arrow mt-8 text-navy-800">
+            <SectionHeading id="faq-title" title="Perguntas que todo mundo deveria fazer." />
+            <Link href="/ajuda" className="link-arrow mt-8 text-brand-800">
               Ver central de ajuda
             </Link>
           </div>

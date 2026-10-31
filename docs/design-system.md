@@ -8,22 +8,52 @@
 3. **Legível para todos.** O corpo do texto tem 17 px, as áreas de toque têm no mínimo 44 px (botões com 52 px) e o contraste é AA.
 4. **Performance acima de efeito.** O movimento é feito só com CSS e respeita `prefers-reduced-motion`.
 
-## Cores (tokens)
+## Cores oficiais — pendência
+
+Os HEX oficiais **ainda não foram confirmados**. Tentativas feitas em 31/10/2026:
+- `www.credflexfinanceira.com.br`: bloqueado pela política de rede do ambiente (proxy 403 / DNS);
+- Google Drive conectado: nenhum arquivo de marca da CredFlex (busca por título e texto);
+- busca na web: nenhuma fonte com as cores da marca.
+
+Os valores atuais são **provisórios** e não representam a marca. O briefing indica roxo + amarelo; o roxo ainda não foi aplicado porque o tom exato não foi verificado.
+
+### Como aplicar as cores oficiais (uma linha cada)
+Em `src/app/globals.css`, bloco `@theme`:
+```css
+--color-brand: #XXXXXX;  /* roxo oficial */
+--color-accent: #XXXXXX; /* amarelo oficial */
+```
+Todas as escalas (`brand-100…950`, `accent-100…600`) são derivadas com `color-mix(in oklab, …)`, então botões, formulários, foco, bordas, fundos e ícones mudam juntos. Depois da troca, é obrigatório: (1) revisar o contraste dos pares da tabela abaixo; (2) rodar `npm run screenshots`; (3) ajustar o percentual da escala se o roxo oficial for muito claro ou muito escuro.
+
+## Superfícies e ritmo
+
+| Superfície | Token | Uso | Texto |
+|---|---|---|---|
+| Amarelo | `bg-accent-400` | Hero da home e dos produtos, Como funciona, comparação de portabilidade, FAQ de produto, CTA final, canais oficiais, 404 | `brand-950` / `ink-2`; botão primário `btn-brand` |
+| Marca (roxo) | `bg-brand-900` / `brand-950` | Seletor de perfil, Quem está por trás, Localização, etapas do produto, princípios, heros de Portabilidade/Servidor/Segurança/legais, rodapé | `white` / `brand-100`; botão `btn-primary` (amarelo) |
+| Branco | `bg-white` (`paper`) | Modalidades, Transparência, FAQ da home, conteúdo de produto, pré-análise, formulários, documentos legais | `ink` / `ink-2` |
+
+Regras:
+- Nunca há duas seções seguidas com a mesma superfície.
+- O amarelo nunca é usado como texto sobre o branco.
+- O foco é escuro (`brand-700`) em superfícies claras ou amarelas e amarelo nas superfícies da marca.
+- Cinza `stone` não é usado sobre o amarelo (contraste insuficiente).
+
+**Sequência da home:** amarelo → marca → branco → marca → amarelo → branco → marca → branco → amarelo → marca (rodapé).
+
+## Tokens neutros e de estado
 
 | Token | Hex | Uso |
 |---|---|---|
-| `navy-950` | `#081428` | Faixa antifraude, seletor de perfil, rodapé |
-| `navy-900` | `#0d1f3c` | Áreas de autoridade, botão secundário |
-| `navy-700` | `#1d3d6e` | Links, destaque tipográfico, foco em fundo claro |
-| `navy-500/300/100` | | Numerais, textos em fundo escuro, seleção |
-| `gold-400` | `#f4b81c` | **Ação principal** e assinatura (barras do F, traço) |
-| `gold-300/100` | | Hover, realces e fundo da seção FGTS |
-| `paper` | `#f8f5ef` | Superfície principal (off-white quente) |
-| `paper-2`, `sand` | | Ritmo entre seções e bordas |
-| `stone`, `ink`, `ink-2` | | Textos secundário, principal e de corpo |
+| `paper` | `#ffffff` | Superfície de conteúdo |
+| `paper-2` | `#f5f5f3` | Cartões sobre o branco |
+| `sand` / `sand-600` | `#e5e4e0` / `#c6c4bd` | Bordas |
+| `stone` | `#5f5e5a` | Texto secundário (somente sobre o branco) |
+| `ink` / `ink-2` | `#121318` / `#383a42` | Texto |
 | `ok`, `warn`, `error`, `info` (+ `-bg`) | | Estados |
 
-O amarelo nunca é usado como cor de texto sobre fundo claro (contraste insuficiente). Ele aparece só como preenchimento, detalhe ou texto sobre navy.
+## Rótulos acima dos títulos
+Eyebrows e categorias acima das headlines foram **removidos**. Rótulos funcionais permanecem: títulos das colunas do rodapé, grupos do menu, o rótulo "Seu protocolo" e as legendas internas dos diagramas.
 
 ## Tipografia
 
@@ -47,7 +77,7 @@ O amarelo nunca é usado como cor de texto sobre fundo claro (contraste insufici
 
 - **Monograma provisório** (`Monogram`): um arco do C aberto à direita, com haste e duas barras do F que "saem" pela abertura.
 - **O traço** (`CFPath`): o arco do C se desdobra em duas linhas paralelas que funcionam como caminho. Aparece no hero (sobre a foto, com animação de desenho), na 404, no PageHero e no CTA final.
-- **Barras do F** (`.fbars`): duas barras douradas de comprimentos diferentes. Marcam eyebrows, indicam o estado ativo do menu móvel e formam a base do indicador de progresso do wizard.
+- **Barras do F** (`.fbars`, `.fbars-brand` sobre o amarelo): indicam o estado ativo do menu móvel, marcam cartões e formam a base do indicador de progresso do wizard.
 - **Arco de recorte**: as fotos recebem um canto com raio de 35–42%, que ecoa o C.
 
 ## Espaçamento e grid

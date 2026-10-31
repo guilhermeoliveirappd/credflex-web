@@ -67,8 +67,8 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               aria-expanded={menuOpen}
               aria-controls="menu-modalidades"
               onClick={() => setMenuOpen((v) => !v)}
-              className={`flex h-11 items-center gap-1.5 rounded-sm px-3 font-semibold transition-colors hover:text-navy-700 ${
-                isProductPath || menuOpen ? "text-navy-900" : "text-ink-2"
+              className={`flex h-11 items-center gap-1.5 rounded-sm px-3 font-semibold transition-colors hover:text-brand-700 ${
+                isProductPath || menuOpen ? "text-brand-900" : "text-ink-2"
               }`}
             >
               Modalidades
@@ -89,13 +89,13 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
                           <Link
                             href={item.href}
                             aria-current={pathname === item.href ? "page" : undefined}
-                            className="group flex items-start justify-between gap-3 rounded-sm px-3 py-2.5 transition-colors hover:bg-navy-100/60 aria-[current=page]:bg-gold-100"
+                            className="group flex items-start justify-between gap-3 rounded-sm px-3 py-2.5 transition-colors hover:bg-brand-100/60 aria-[current=page]:bg-accent-100"
                           >
                             <span>
-                              <span className="block font-semibold leading-tight text-navy-900">{item.label}</span>
+                              <span className="block font-semibold leading-tight text-brand-900">{item.label}</span>
                               <span className="t-small block text-stone">{item.description}</span>
                             </span>
-                            <ArrowRight aria-hidden className="mt-1 h-4 w-4 flex-none -translate-x-1 text-navy-700 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                            <ArrowRight aria-hidden className="mt-1 h-4 w-4 flex-none -translate-x-1 text-brand-700 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                           </Link>
                         </li>
                       ))}
@@ -105,7 +105,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               </div>
               <Link
                 href="/simulacao"
-                className="flex items-center justify-between border-t border-sand px-5 py-3.5 text-[0.95rem] font-semibold text-navy-900 hover:bg-gold-100"
+                className="flex items-center justify-between border-t border-sand px-5 py-3.5 text-[0.95rem] font-semibold text-brand-900 hover:bg-accent-100"
               >
                 Não sabe qual escolher? Responda algumas perguntas
                 <ArrowRight aria-hidden className="h-4 w-4" />
@@ -117,7 +117,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               key={item.href}
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
-              className="relative flex h-11 items-center rounded-sm px-3 font-semibold text-ink-2 transition-colors hover:text-navy-700 aria-[current=page]:text-navy-900 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1.5 aria-[current=page]:after:h-[2px] aria-[current=page]:after:bg-gold-400"
+              className="relative flex h-11 items-center rounded-sm px-3 font-semibold text-ink-2 transition-colors hover:text-brand-700 aria-[current=page]:text-brand-900 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1.5 aria-[current=page]:after:h-[2px] aria-[current=page]:after:bg-accent-400"
             >
               {item.label}
             </Link>
@@ -131,7 +131,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => track("whatsapp_click", { cta_location: "header" })}
-              className="hidden h-11 items-center rounded-sm px-3 text-[0.95rem] font-semibold text-navy-900 hover:text-navy-700 xl:flex"
+              className="hidden h-11 items-center rounded-sm px-3 text-[0.95rem] font-semibold text-brand-900 hover:text-brand-700 xl:flex"
             >
               WhatsApp oficial
             </a>
@@ -145,7 +145,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
           </Link>
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-sm text-navy-900 hover:bg-sand/60 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-sm text-brand-900 hover:bg-sand/60 lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen(true)}
@@ -205,7 +205,7 @@ function MobileNavigation({
 
   return (
     <div id="mobile-nav" className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
-      <div className="absolute inset-0 bg-navy-950/40" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-brand-950/40" onClick={onClose} aria-hidden />
       <div ref={panelRef} className="absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-paper">
         <div className="flex h-[var(--header-h)] flex-none items-center justify-between border-b border-sand px-[var(--gutter)]">
           <Logo />
@@ -213,7 +213,7 @@ function MobileNavigation({
             type="button"
             data-autofocus
             onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-sm text-navy-900 hover:bg-sand/60"
+            className="flex h-11 w-11 items-center justify-center rounded-sm text-brand-900 hover:bg-sand/60"
           >
             <X aria-hidden className="h-6 w-6" />
             <span className="sr-only">Fechar menu</span>
@@ -229,13 +229,13 @@ function MobileNavigation({
                     <Link
                       href={item.href}
                       aria-current={pathname === item.href ? "page" : undefined}
-                      className="flex min-h-[60px] items-center justify-between gap-3 py-2.5 aria-[current=page]:text-navy-700"
+                      className="flex min-h-[60px] items-center justify-between gap-3 py-2.5 aria-[current=page]:text-brand-700"
                     >
                       <span>
-                        <span className="block font-semibold text-navy-900">{item.label}</span>
+                        <span className="block font-semibold text-brand-900">{item.label}</span>
                         <span className="block text-[0.9rem] text-stone">{item.description}</span>
                       </span>
-                      {pathname === item.href ? <span className="fbars" aria-hidden /> : <ArrowRight aria-hidden className="h-4 w-4 flex-none text-navy-700" />}
+                      {pathname === item.href ? <span className="fbars" aria-hidden /> : <ArrowRight aria-hidden className="h-4 w-4 flex-none text-brand-700" />}
                     </Link>
                   </li>
                 ))}
@@ -248,7 +248,7 @@ function MobileNavigation({
                 <Link
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className="flex min-h-12 items-center rounded-sm bg-paper-2 px-3 font-semibold text-navy-900 aria-[current=page]:bg-gold-100"
+                  className="flex min-h-12 items-center rounded-sm bg-paper-2 px-3 font-semibold text-brand-900 aria-[current=page]:bg-accent-100"
                 >
                   {item.label}
                 </Link>
@@ -261,7 +261,7 @@ function MobileNavigation({
             Iniciar pré-análise
           </Link>
           {whatsappHref && (
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-ghost w-full text-navy-900">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-ghost w-full text-brand-900">
               WhatsApp oficial
             </a>
           )}

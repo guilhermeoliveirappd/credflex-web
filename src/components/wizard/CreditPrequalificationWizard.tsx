@@ -359,7 +359,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
       {restored && step !== "perfil" && (
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-sand bg-paper px-5 py-3 sm:px-8">
           <p className="t-small text-ink-2">Recuperamos as respostas que você já tinha preenchido nesta sessão.</p>
-          <button type="button" onClick={restart} className="inline-flex min-h-11 items-center gap-1.5 text-[0.92rem] font-semibold text-navy-700 underline">
+          <button type="button" onClick={restart} className="inline-flex min-h-11 items-center gap-1.5 text-[0.92rem] font-semibold text-brand-700 underline">
             <RotateCcw aria-hidden className="h-4 w-4" /> Recomeçar
           </button>
         </div>
@@ -387,7 +387,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
 
         {step === "perfil" && (
           <section aria-labelledby="wz-h">
-            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-navy-950 outline-none">
+            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-brand-950 outline-none">
               Qual dessas opções combina com você?
             </h2>
             <p className="mt-2 text-ink-2">Escolha a situação mais parecida com a sua. A equipe confirma depois.</p>
@@ -403,7 +403,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
             </div>
             <p className="t-small mt-5 text-stone">
               Não encontrou a sua situação?{" "}
-              <Link href="/contato" className="font-semibold text-navy-700 underline">
+              <Link href="/contato" className="font-semibold text-brand-700 underline">
                 Fale com a equipe
               </Link>
               .
@@ -413,9 +413,8 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
 
         {step === "perguntas" && flow && (
           <section aria-labelledby="wz-h">
-            <p className="t-eyebrow text-navy-500">{products[flow.product].name}</p>
-            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 mt-2 text-navy-950 outline-none">
-              Algumas perguntas sobre a sua situação
+            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-brand-950 outline-none">
+              {products[flow.product].name}: algumas perguntas
             </h2>
             <p className="mt-2 text-ink-2">{flow.intro}</p>
             <div className="mt-8 space-y-9">
@@ -439,7 +438,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
                   />
                 ) : (
                   <div key={q.id}>
-                    <label htmlFor={`q-${q.id}`} className="field-label !text-[1.15rem] text-navy-950">
+                    <label htmlFor={`q-${q.id}`} className="field-label !text-[1.15rem] text-brand-950">
                       {q.label}
                     </label>
                     {q.help && <p className="field-help !mt-0 mb-3">{q.help}</p>}
@@ -464,17 +463,17 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
             </div>
 
             {decision?.kind === "switch" && (
-              <div role="status" className="mt-8 rounded-[var(--radius-sm)] border border-navy-300 bg-navy-100/50 p-5">
-                <p className="flex items-start gap-2 font-bold text-navy-950">
-                  <Info aria-hidden className="mt-0.5 h-5 w-5 flex-none text-navy-700" />
+              <div role="status" className="mt-8 rounded-[var(--radius-sm)] border border-brand-300 bg-brand-100/50 p-5">
+                <p className="flex items-start gap-2 font-bold text-brand-950">
+                  <Info aria-hidden className="mt-0.5 h-5 w-5 flex-none text-brand-700" />
                   Pela sua resposta, a modalidade mais adequada é {products[decision.to].name}.
                 </p>
                 <p className="mt-1 pl-7 text-ink-2">{products[decision.to].mechanism}</p>
                 <div className="mt-4 flex flex-col gap-2 pl-7 sm:flex-row">
-                  <button type="button" className="btn btn-navy min-h-11" onClick={() => acceptSwitch(decision.to)}>
+                  <button type="button" className="btn btn-brand min-h-11" onClick={() => acceptSwitch(decision.to)}>
                     Seguir com {products[decision.to].shortName}
                   </button>
-                  <button type="button" className="btn btn-ghost min-h-11 text-navy-900" onClick={() => setDecision(null)}>
+                  <button type="button" className="btn btn-ghost min-h-11 text-brand-900" onClick={() => setDecision(null)}>
                     Revisar respostas
                   </button>
                 </div>
@@ -485,7 +484,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
 
         {step === "valor" && (
           <section aria-labelledby="wz-h">
-            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-navy-950 outline-none">
+            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-brand-950 outline-none">
               Quanto você gostaria e em quanto tempo?
             </h2>
             <p className="mt-2 text-ink-2">
@@ -493,7 +492,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
             </p>
             <div className="mt-8 space-y-9">
               <div>
-                <label htmlFor="amount" className="field-label !text-[1.15rem] text-navy-950">
+                <label htmlFor="amount" className="field-label !text-[1.15rem] text-brand-950">
                   Valor aproximado
                 </label>
                 <div className="relative mt-3 max-w-sm">
@@ -519,7 +518,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
                 <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-3">
                   <input
                     type="checkbox"
-                    className="h-5 w-5 accent-navy-800"
+                    className="h-5 w-5 accent-brand-800"
                     {...register("amountUnknown", {
                       onChange: () => {
                         clearErrors("amount");
@@ -552,9 +551,9 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
         {step === "contato" && (
           <section aria-labelledby="wz-h" onFocusCapture={onContactFocus}>
             {humanReview && decision.product === "bpc-loas" && (
-              <div role="status" className="mb-8 rounded-[var(--radius-sm)] border border-navy-300 bg-navy-100/50 p-5">
-                <p className="flex items-start gap-2 font-bold text-navy-950">
-                  <Info aria-hidden className="mt-0.5 h-5 w-5 flex-none text-navy-700" />
+              <div role="status" className="mb-8 rounded-[var(--radius-sm)] border border-brand-300 bg-brand-100/50 p-5">
+                <p className="flex items-start gap-2 font-bold text-brand-950">
+                  <Info aria-hidden className="mt-0.5 h-5 w-5 flex-none text-brand-700" />
                   BPC/LOAS tem regras diferentes da aposentadoria do INSS.
                 </p>
                 <p className="mt-1 pl-7 text-ink-2">
@@ -563,7 +562,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
                 </p>
               </div>
             )}
-            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-navy-950 outline-none">
+            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-brand-950 outline-none">
               Como falamos com você?
             </h2>
             <p className="mt-2 text-ink-2">Pedimos só o necessário para retornar o seu contato. Não pedimos CPF nesta etapa.</p>
@@ -638,7 +637,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
                 <label className="flex cursor-pointer items-start gap-3">
                   <input
                     type="checkbox"
-                    className="mt-1 h-5 w-5 flex-none accent-navy-800"
+                    className="mt-1 h-5 w-5 flex-none accent-brand-800"
                     aria-invalid={!!errors.consentContact}
                     aria-describedby={errors.consentContact ? "cc-err" : undefined}
                     {...register("consentContact", { onChange: () => clearErrors("consentContact") })}
@@ -646,7 +645,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
                   <span className="text-[0.97rem] leading-relaxed">
                     <strong>Autorizo a CredFlex a usar meu nome e WhatsApp</strong> para entrar em contato sobre esta
                     solicitação de pré-análise, conforme a{" "}
-                    <Link href="/politica-de-privacidade" target="_blank" className="font-semibold text-navy-700 underline">
+                    <Link href="/politica-de-privacidade" target="_blank" className="font-semibold text-brand-700 underline">
                       Política de Privacidade
                     </Link>
                     . <span className="text-stone">(obrigatório)</span>
@@ -659,7 +658,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
                   </p>
                 )}
                 <label className="flex cursor-pointer items-start gap-3">
-                  <input type="checkbox" className="mt-1 h-5 w-5 flex-none accent-navy-800" {...register("consentMarketing")} />
+                  <input type="checkbox" className="mt-1 h-5 w-5 flex-none accent-brand-800" {...register("consentMarketing")} />
                   <span className="text-[0.97rem] leading-relaxed">
                     Aceito receber novidades e ofertas da CredFlex pelo WhatsApp. Posso cancelar quando quiser.{" "}
                     <span className="text-stone">(opcional)</span>
@@ -672,7 +671,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
 
         {step === "revisao" && (
           <section aria-labelledby="wz-h">
-            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-navy-950 outline-none">
+            <h2 id="wz-h" ref={headingRef} tabIndex={-1} className="t-h3 text-brand-950 outline-none">
               Confira antes de enviar
             </h2>
             <p className="mt-2 text-ink-2">Você pode corrigir qualquer informação. Nada é contratado ao enviar.</p>
@@ -703,7 +702,7 @@ export function CreditPrequalificationWizard({ initialProduct }: { initialProduc
             {stepIndex > 0 ? (
               <button
                 type="button"
-                className="btn min-h-12 justify-start px-0 text-navy-800 hover:text-navy-950 sm:px-2"
+                className="btn min-h-12 justify-start px-0 text-brand-800 hover:text-brand-950 sm:px-2"
                 onClick={() => {
                   const prev = steps[stepIndex - 1]?.id as StepId;
                   if (prev) go(prev);
@@ -739,9 +738,9 @@ function ReviewRow({ label, value, onEdit }: { label: string; value: string; onE
   return (
     <div className="grid grid-cols-[1fr_auto] items-start gap-x-4 py-3.5 sm:grid-cols-[minmax(0,15rem)_1fr_auto]">
       <dt className="t-small text-stone">{label}</dt>
-      <dd className="col-start-1 font-semibold text-navy-950 sm:col-start-2">{value}</dd>
+      <dd className="col-start-1 font-semibold text-brand-950 sm:col-start-2">{value}</dd>
       <dd className="col-start-2 row-span-2 row-start-1 sm:col-start-3">
-        <button type="button" onClick={onEdit} className="inline-flex min-h-11 items-center gap-1.5 px-2 text-[0.9rem] font-semibold text-navy-700 hover:underline">
+        <button type="button" onClick={onEdit} className="inline-flex min-h-11 items-center gap-1.5 px-2 text-[0.9rem] font-semibold text-brand-700 hover:underline">
           <Pencil aria-hidden className="h-3.5 w-3.5" /> Editar<span className="sr-only">: {label}</span>
         </button>
       </dd>
@@ -771,11 +770,11 @@ export function LeadSubmissionStatus({ state, onRetry, onEditContact }: { state:
       <p className="mt-1 pl-7 text-ink-2">{c.text}</p>
       <div className="mt-3 flex flex-wrap gap-2 pl-7">
         {state.error === "invalid" ? (
-          <button type="button" onClick={onEditContact} className="btn btn-ghost min-h-11 text-navy-900">
+          <button type="button" onClick={onEditContact} className="btn btn-ghost min-h-11 text-brand-900">
             Revisar contato
           </button>
         ) : (
-          <button type="button" onClick={onRetry} className="btn btn-ghost min-h-11 text-navy-900">
+          <button type="button" onClick={onRetry} className="btn btn-ghost min-h-11 text-brand-900">
             <RotateCcw aria-hidden className="h-4 w-4" /> Tentar novamente
           </button>
         )}
