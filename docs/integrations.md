@@ -60,3 +60,16 @@ Os tipos `Product`, `Fact` e `FaqItem` já servem de schema. A troca afeta só `
 - Rate limit compartilhado (Upstash Redis ou Vercel KV) para ambientes serverless com várias instâncias.
 - Armazenamento de currículos com criptografia em repouso, retenção definida e antivírus (S3 com SSE + ClamAV, ou e-mail transacional para o RH).
 - CSP com nonce, caso seja preciso remover `'unsafe-inline'`. Isso exige renderização dinâmica e tem custo de performance.
+
+## Google Maps: diagnóstico e configuração (v4)
+
+**Causa provável do erro:** para usuários no Brasil, o Google pode redirecionar o embed de `www.google.com` para `www.google.com.br`. A CSP (`frame-src`) só permitia `www.google.com` e `maps.google.com`, então o navegador bloqueava o iframe e mostrava uma página de erro. Os domínios `.com.br` foram adicionados.
+
+**Limitação:** o ambiente de desenvolvimento não acessa o Google, então não foi possível reproduzir o erro nem ver o mapa renderizado aqui. Confirme na prévia da Vercel.
+
+**Origem do mapa**, em ordem de preferência (`LocationMap.tsx`):
+1. `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL`: o `src` do iframe em Google Maps › Compartilhar › Incorporar um mapa, a partir do Perfil da Empresa. Garante o marcador exato. **Recomendado.**
+2. `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY`: Maps Embed API oficial. É gratuita, exige chave no Google Cloud e deve ser restrita ao domínio.
+3. Sem configuração: `maps.google.com/maps?q=<endereço>&output=embed`, sem chave.
+
+**Privacidade:** o mapa carrega com um clique em "Mostrar mapa", automaticamente se houver consentimento de publicidade, ou se a pessoa já o carregou antes. Antes disso aparece um painel com o endereço real, que não imita um mapa. "Abrir no Google Maps" funciona sempre. Se o carregamento passar de 12s, aparece uma orientação para abrir no Google Maps.

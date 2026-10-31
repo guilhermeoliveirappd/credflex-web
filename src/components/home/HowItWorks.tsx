@@ -3,20 +3,20 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 /** Etapas espelham exatamente o fluxo implementado em /simulacao. */
 const steps = [
   {
-    title: "Você identifica o seu perfil",
-    text: "Carteira assinada, aposentadoria, serviço público, FGTS ou conta de luz. Se não souber, ajudamos.",
+    title: "Escolha o seu perfil",
+    text: "Se não souber qual é, a gente ajuda.",
   },
   {
-    title: "Responde poucas perguntas",
-    text: "Só o necessário para a pré-análise, mais nome e WhatsApp para contato. Sem CPF nesta etapa.",
+    title: "Responda poucas perguntas",
+    text: "Só nome e WhatsApp para contato. Sem CPF.",
   },
   {
-    title: "Recebe orientação de uma pessoa",
-    text: "A equipe retorna com as possibilidades para o seu caso e os próximos passos, com o seu protocolo.",
+    title: "Fale com a equipe",
+    text: "Uma pessoa retorna com as opções para o seu caso.",
   },
   {
-    title: "Decide com a proposta na mão",
-    text: "A contratação, quando disponível, depende de análise e aprovação da instituição parceira.",
+    title: "Decida com a proposta em mãos",
+    text: "A contratação depende da aprovação da instituição parceira.",
   },
 ];
 
@@ -28,7 +28,7 @@ export function HowItWorks({ tone = "accent" }: { tone?: "navy" | "accent" }) {
         <SectionHeading
           id="como-funciona-title"
           tone={dark ? "light" : "dark"}
-          title="Um caminho em quatro passos, sem atalhos escondidos."
+          title="Como funciona"
           className="max-w-3xl"
         />
         <ol className="relative mt-16 grid gap-10 md:grid-cols-4 md:gap-6">
@@ -52,10 +52,6 @@ export function HowItWorks({ tone = "accent" }: { tone?: "navy" | "accent" }) {
             </li>
           ))}
         </ol>
-        <p className={`t-small mt-14 max-w-[70ch] border-t pt-6 ${dark ? "border-white/10 text-brand-300" : "border-brand-900/20 text-brand-950"}`}>
-          Os três primeiros passos acontecem com a CredFlex. O quarto depende da instituição parceira, que faz a análise de
-          crédito e define as condições finais.
-        </p>
       </div>
     </section>
   );

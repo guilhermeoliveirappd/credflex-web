@@ -29,7 +29,7 @@ const sans = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "CredFlex — crédito com gente de verdade por trás", template: "%s | CredFlex" },
+  title: { default: "CredFlex | Crédito com gente de verdade", template: "%s | CredFlex" },
   description:
     "Correspondente bancário em Osvaldo Cruz/SP. Consignado CLT, INSS, portabilidade, servidor público, FGTS e conta de luz com atendimento humano e informação clara.",
   applicationName: "CredFlex",

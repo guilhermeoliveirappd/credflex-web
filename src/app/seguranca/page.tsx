@@ -78,7 +78,7 @@ export default function SegurancaPage() {
               <ReviewMark note="Bloqueante para publicação: o site antigo exibia números diferentes; definir canais oficiais únicos." /> A lista de canais oficiais será publicada após confirmação.
             </p>
           )}
-          <p className="mt-8 text-brand-950">
+          <p className="support-text mt-8 text-brand-950">
             Se você recebeu um contato suspeito em nome da CredFlex, não forneça dados e avise a nossa equipe pelos canais
             acima. Em caso de golpe, registre boletim de ocorrência e comunique o seu banco.
           </p>

@@ -19,7 +19,7 @@ export const milestones: Milestone[] = [
   {
     year: "…",
     title: "Marcos intermediários",
-    text: "Novas modalidades, mudança de sede, parcerias — aguardando informações da CredFlex.",
+    text: "Novas modalidades, mudança de sede e parcerias. Aguardando informações da CredFlex.",
     status: "pending",
   },
   {
@@ -29,7 +29,8 @@ export const milestones: Milestone[] = [
   },
 ];
 
-export const homeFaq: FaqItem[] = [
+/** Todas as dúvidas gerais (página Ajuda). A home mostra só as 4 primeiras. */
+export const generalFaq: FaqItem[] = [
   {
     q: "A CredFlex é um banco?",
     a: "Não. A CredFlex atua como correspondente bancário: apresenta e intermedeia produtos de crédito de instituições financeiras parceiras. A análise e a liberação do crédito são feitas pela instituição.",
@@ -61,3 +62,5 @@ export const homeFaq: FaqItem[] = [
     status: "pending",
   },
 ];
+
+export const homeFaq = generalFaq.slice(0, 4);

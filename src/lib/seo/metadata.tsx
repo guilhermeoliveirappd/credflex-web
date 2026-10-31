@@ -39,6 +39,7 @@ export function organizationJsonLd() {
     areaServed: "BR",
   };
   if (site.legal.razaoSocial) data.legalName = site.legal.razaoSocial;
+  if (site.legal.cnpj) data.taxID = site.legal.cnpj;
   const tel = site.channels.phone ?? site.channels.whatsapp;
   if (tel) data.telephone = `+${tel.replace(/\D/g, "")}`;
   if (site.channels.email) data.email = site.channels.email;

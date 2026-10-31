@@ -25,7 +25,7 @@ export default function Page() {
           ),
         },
         { id: "finalidades", title: "Para que usamos", body: <p>Retornar o contato solicitado, orientar sobre modalidades de crédito e encaminhar a solicitação a instituições parceiras quando você autorizar. Envio de ofertas somente com consentimento específico e revogável. [Bases legais a definir pelo jurídico.]</p> },
-        { id: "compartilhamento", title: "Com quem compartilhamos", body: <p>[Instituições financeiras parceiras, fornecedor de CRM e provedores de infraestrutura — lista a confirmar.]</p> },
+        { id: "compartilhamento", title: "Com quem compartilhamos", body: <p>[Instituições financeiras parceiras, fornecedor de CRM e provedores de infraestrutura. Lista a confirmar.]</p> },
         { id: "retencao", title: "Por quanto tempo guardamos", body: <p>[Prazos de retenção a definir.]</p> },
         { id: "direitos", title: "Seus direitos", body: <p>Você pode solicitar confirmação, acesso, correção, anonimização, portabilidade, eliminação e informações sobre compartilhamento, além de revogar consentimentos, pelo canal [contato do encarregado].</p> },
         { id: "seguranca", title: "Segurança", body: <p>Os dados trafegam por conexão criptografada, são validados no servidor e não são enviados a ferramentas de medição. [Detalhar medidas após definição do CRM.]</p> },

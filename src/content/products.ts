@@ -69,13 +69,13 @@ export const products: Record<ProductSlug, Product> = {
     layout: "payroll",
     audience: "Trabalhadores com carteira assinada",
     summary: "Crédito com parcelas descontadas diretamente do salário.",
-    teaser: "Parcelas descontadas direto do salário de quem tem carteira assinada.",
+    teaser: "Para quem tem carteira assinada.",
     mechanism:
       "As parcelas são descontadas na folha de pagamento, dentro do limite permitido para o seu salário. Você não precisa lembrar de boletos.",
     heroTitle: "Crédito para quem tem carteira assinada, com a parcela direto na folha.",
     heroLead:
       "Conte um pouco sobre o seu vínculo de trabalho. Uma pessoa da nossa equipe analisa o seu caso e explica quais caminhos existem.",
-    seoTitle: "Consignado CLT — crédito com desconto em folha",
+    seoTitle: "Consignado CLT: crédito com desconto em folha",
     seoDescription:
       "Entenda como funciona o consignado para trabalhadores com carteira assinada e inicie uma pré-análise com atendimento humano da CredFlex.",
     forWhom: [
@@ -124,7 +124,7 @@ export const products: Record<ProductSlug, Product> = {
     layout: "benefit",
     audience: "Aposentados e pensionistas do INSS",
     summary: "Crédito com parcelas descontadas do benefício.",
-    teaser: "Crédito consignado para aposentados e pensionistas do INSS.",
+    teaser: "Para aposentados e pensionistas do INSS.",
     mechanism:
       "As parcelas são descontadas todo mês diretamente da aposentadoria ou pensão, dentro da margem consignável do benefício.",
     heroTitle: "Para aposentados e pensionistas: crédito explicado com calma, do começo ao fim.",
@@ -184,7 +184,7 @@ export const products: Record<ProductSlug, Product> = {
     layout: "portability",
     audience: "Quem já tem consignado INSS",
     summary: "Transferir um consignado existente para outra instituição.",
-    teaser: "Transfira o consignado que você já tem para outra instituição.",
+    teaser: "Leve o seu consignado para outra instituição.",
     mechanism:
       "Portabilidade não é um empréstimo novo: o contrato que você já tem é transferido para outra instituição, que pode oferecer condições diferentes.",
     heroTitle: "Já tem consignado? Vamos ver se faz sentido transferir o seu contrato.",
@@ -228,7 +228,7 @@ export const products: Record<ProductSlug, Product> = {
     layout: "public",
     audience: "Servidores públicos",
     summary: "Consignado para servidores de órgãos conveniados.",
-    teaser: "Consignado para servidores de órgãos com convênio ativo.",
+    teaser: "Para servidores de órgãos conveniados.",
     mechanism:
       "As parcelas são descontadas na folha do órgão. A disponibilidade depende de convênio entre o seu órgão e a instituição parceira.",
     heroTitle: "Servidor público: o primeiro passo é saber se o seu órgão é conveniado.",
@@ -266,7 +266,7 @@ export const products: Record<ProductSlug, Product> = {
     layout: "fgts",
     audience: "Quem tem saldo no FGTS",
     summary: "Antecipar parcelas do saque-aniversário do FGTS.",
-    teaser: "Antecipe parcelas do saque-aniversário do seu FGTS.",
+    teaser: "Antecipe o seu saque-aniversário.",
     mechanism:
       "Você recebe antecipadamente valores do saque-aniversário. As parcelas são pagas com o próprio saldo do FGTS, nas datas de aniversário.",
     heroTitle: "Saque-aniversário do FGTS: entenda as regras antes de antecipar.",
@@ -310,7 +310,7 @@ export const products: Record<ProductSlug, Product> = {
     layout: "energy",
     audience: "Titulares de conta de energia",
     summary: "Crédito com parcelas cobradas na fatura de energia.",
-    teaser: "Parcelas cobradas na fatura de energia, para titulares.",
+    teaser: "Parcelas na fatura de energia.",
     mechanism:
       "As parcelas vêm junto com a fatura de energia elétrica. A disponibilidade depende da distribuidora da sua região.",
     heroTitle: "Crédito com a parcela na conta de luz, para quem é titular da fatura.",

@@ -4,10 +4,10 @@ import { CFPath } from "@/components/brand/CFPath";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 
 export function FinalCTA({
-  title = "Quando fizer sentido para você, a gente conversa.",
-  text = "Comece pela pré-análise. Leva poucos minutos, não tem compromisso e uma pessoa da equipe retorna com as possibilidades para o seu caso.",
+  title = "Vamos conversar?",
+  text = "A pré-análise leva poucos minutos e não tem compromisso.",
   href = "/simulacao",
-  label = "Iniciar pré-análise",
+  label = "Consultar meu crédito",
   tone = "accent",
 }: {
   title?: string;

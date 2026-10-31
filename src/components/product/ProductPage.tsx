@@ -54,7 +54,7 @@ export function ProductPage({ product: p }: { product: Product }) {
             <SectionHeading id="para-quem-title" title={p.summary} />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="t-lead text-ink-2">{p.mechanism}</p>
+            <p className="support-text t-lead text-ink-2">{p.mechanism}</p>
             <ul className="mt-8 space-y-3">
               {p.forWhom.map((f) => (
                 <li key={f.text} className="flex gap-3 border-t border-sand pt-3">

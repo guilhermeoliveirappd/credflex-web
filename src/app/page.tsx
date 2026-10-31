@@ -16,12 +16,12 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "CredFlex — crédito com gente de verdade por trás",
+    title: "CredFlex | Crédito com gente de verdade",
     description:
-      "Correspondente bancário em Osvaldo Cruz/SP. Descubra a modalidade certa para o seu perfil — CLT, INSS, portabilidade, servidor público, FGTS ou conta de luz — com atendimento humano.",
+      "Correspondente bancário em Osvaldo Cruz/SP. Consignado CLT e INSS, portabilidade, servidor público, FGTS e conta de luz, com atendimento humano.",
     path: "/",
   }),
-  title: { absolute: "CredFlex — crédito com gente de verdade por trás" },
+  title: { absolute: "CredFlex | Crédito com gente de verdade" },
 };
 
 export default function HomePage() {
@@ -38,7 +38,7 @@ export default function HomePage() {
       <section aria-labelledby="faq-title" className="bg-paper py-[var(--section-y)]">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionHeading id="faq-title" title="Perguntas que todo mundo deveria fazer." />
+            <SectionHeading id="faq-title" title="Dúvidas frequentes" />
             <Link href="/ajuda" className="link-arrow mt-8 text-brand-800">
               Ver central de ajuda
             </Link>

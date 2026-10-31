@@ -23,7 +23,7 @@ export default function ContatoPage() {
           <div className="lg:col-span-7">
             <h2 className="t-h3 mb-6 text-brand-950">Canais oficiais</h2>
             <ContactCard tone="light" />
-            <p className="mt-5 text-ink-2">
+            <p className="support-text mt-5 text-ink-2">
               Estes são os únicos canais da CredFlex. Se receber contato por outro número ou perfil em nosso nome, não
               forneça dados e confirme com a equipe por aqui.
             </p>

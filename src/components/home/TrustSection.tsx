@@ -29,20 +29,16 @@ export function InstitutionalTimeline({ tone = "dark" }: { tone?: "dark" | "ligh
 
 export function TrustSection() {
   const { location } = site;
-  const hasMilestones = milestones.some((m) => m.status === "confirmed" || showReviewMarkers);
   return (
     <section aria-labelledby="confianca-title" className="noise bg-brand-900 py-[var(--section-y)] text-white">
       <div className="container-x">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <h2 id="confianca-title" data-reveal="title" className="t-h2 text-white lg:col-span-6">
-            Crédito com gente de verdade por trás.
+            Uma equipe que você conhece pelo nome.
           </h2>
           <div className="lg:col-span-5 lg:col-start-8">
             <p className="text-[1.08rem] leading-relaxed text-brand-100">
-              A CredFlex é uma empresa de {location.city}, no interior de São Paulo
-              {site.history.foundedYear ? `, com atividades desde ${site.history.foundedYear}` : ""}.{" "}
-              <ReviewMark note={site.history.note} /> Quem atende você tem nome, rosto e endereço — e responde pelo que
-              explica.
+              Somos de {location.city}, no interior de São Paulo. Você conversa com a gente pessoalmente ou pelo WhatsApp.
             </p>
             <Link href="/quem-somos" className="link-arrow mt-4 text-accent-300">
               Conheça a nossa história
@@ -63,13 +59,13 @@ export function TrustSection() {
           />
           <div className="col-span-3 flex min-h-[170px] flex-col justify-between rounded-[var(--radius-md)] bg-accent-400 p-5 text-brand-950 sm:p-6">
             <span className="fbars fbars-brand" aria-hidden />
-            <p className="no-justify font-[family-name:var(--font-display)] text-[1.2rem] font-semibold leading-tight sm:text-[1.45rem]">
+            <p className="font-[family-name:var(--font-display)] text-[1.2rem] font-semibold leading-tight sm:text-[1.45rem]">
               Atendimento humano, do primeiro contato à proposta.
             </p>
           </div>
           <div className="col-span-3 flex min-h-[170px] flex-col justify-between rounded-[var(--radius-md)] bg-brand-800 p-5 sm:p-6">
             <p className="text-[0.95rem] text-brand-100">Em atividade desde</p>
-            <p className="t-num no-justify font-[family-name:var(--font-display)] text-[3rem] font-semibold leading-none text-accent-400 sm:text-[3.6rem]">
+            <p className="t-num font-[family-name:var(--font-display)] text-[3rem] font-semibold leading-none text-accent-400 sm:text-[3.6rem]">
               {site.history.foundedYear} <ReviewMark note={site.history.note} />
             </p>
           </div>
@@ -100,17 +96,6 @@ export function TrustSection() {
           </a>
         </div>
 
-        {hasMilestones && (
-        <div className="mt-14 grid gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h3 className="t-h3 text-white">Trajetória</h3>
-            <p className="mt-3 max-w-[30ch] text-brand-100">Os marcos abaixo serão publicados somente após confirmação da CredFlex.</p>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <InstitutionalTimeline tone="light" />
-          </div>
-        </div>
-        )}
       </div>
     </section>
   );

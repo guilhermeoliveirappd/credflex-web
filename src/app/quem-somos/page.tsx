@@ -52,12 +52,12 @@ export default function QuemSomosPage() {
             />
             <p className="mt-4 flex items-center gap-2 text-[0.95rem] text-ink-2">
               <span className="fbars fbars-brand" aria-hidden />
-              Nosso escritório: {site.location.street}, {site.location.district} — {site.location.city}/{site.location.state}
+              Nosso escritório: {site.location.street}, {site.location.district}, {site.location.city}/{site.location.state}
             </p>
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
             <SectionHeading id="historia-title" title="Nossa história" />
-            <p className="mt-6 text-ink-2">
+            <p className="support-text mt-6 text-ink-2">
               O texto da história institucional será escrito com a CredFlex a partir de informações confirmadas: fundação,
               pessoas, marcos e modalidades. <ReviewMark note="Aguardando entrevista/briefing institucional." />
             </p>

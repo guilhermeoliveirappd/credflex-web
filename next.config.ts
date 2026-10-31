@@ -12,7 +12,9 @@ const csp = [
   "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
   "font-src 'self'",
   "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
-  "frame-src 'self' https://www.google.com https://maps.google.com", // mapa (carregado só após clique/consentimento)
+  // Mapa do Google (carregado só após clique/consentimento). Para usuários no Brasil o
+  // Google pode redirecionar o embed para os domínios .com.br, que precisam constar aqui.
+  "frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com.br https://maps.google.com.br",
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",

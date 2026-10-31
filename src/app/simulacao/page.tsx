@@ -31,7 +31,7 @@ export default async function SimulacaoPage({ searchParams }: { searchParams: Pr
               <UserRound aria-hidden className="mt-0.5 h-5 w-5 flex-none text-brand-700" />
               <span className="text-ink-2">
                 <strong className="text-brand-950">Isto não é uma simulação de parcelas.</strong> Taxas e valores só existem
-                depois da análise da instituição parceira — e chegam a você por escrito.
+                depois da análise da instituição parceira e chegam a você por escrito.
               </span>
             </li>
             <li className="flex gap-3">

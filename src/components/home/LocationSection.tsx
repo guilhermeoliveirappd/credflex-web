@@ -18,7 +18,7 @@ export function ContactCard({ className = "", tone = "dark" }: { className?: str
       body: (
         <>
           <span className="block">
-            {location.street} — {location.district}
+            {location.street}, {location.district}
           </span>
           <span className="block">
             {location.city} – {location.state} · CEP {location.postalCode}
@@ -55,7 +55,7 @@ export function ContactCard({ className = "", tone = "dark" }: { className?: str
       icon: Mail,
       label: "E-mail",
       body: (
-        <a href={`mailto:${channels.email}`} className="break-all hover:underline">
+        <a href={`mailto:${channels.email}`} className="whitespace-nowrap hover:underline">
           {channels.email}
         </a>
       ),
@@ -100,16 +100,13 @@ export function LocationSection() {
             <br />
             <span className="text-accent-400">São Paulo.</span>
           </h2>
-          <p className="t-lead mt-6 max-w-[42ch] text-brand-100">
-            Estamos no centro de {location.city}, na {location.street?.split(",")[0]}. Venha conversar pessoalmente com a
-            equipe, sem pressa e com todas as explicações — e traga quem quiser junto.
-          </p>
+          <p className="t-lead mt-6 max-w-[34ch] text-brand-100">Atendemos no centro da cidade. Venha conversar com a equipe.</p>
           <dl data-reveal="stagger" className="mt-8 space-y-4 border-t border-white/12 pt-7">
             <div className="flex gap-4">
               <dt className="sr-only">Endereço</dt>
               <MapPin aria-hidden className="mt-1 h-5 w-5 flex-none text-accent-400" />
               <dd className="text-[1.02rem] leading-relaxed">
-                {location.street} — {location.district}
+                {location.street}, {location.district}
                 <br />
                 <span className="text-brand-300">
                   {location.city} – {location.state} · CEP {location.postalCode}
@@ -133,7 +130,7 @@ export function LocationSection() {
                 <dt className="sr-only">E-mail</dt>
                 <Mail aria-hidden className="mt-1 h-5 w-5 flex-none text-accent-400" />
                 <dd>
-                  <a href={`mailto:${channels.email}`} className="break-all text-[1.02rem] font-semibold underline-offset-4 hover:text-accent-300 hover:underline">
+                  <a href={`mailto:${channels.email}`} className="whitespace-nowrap text-[1.02rem] font-semibold underline-offset-4 hover:text-accent-300 hover:underline">
                     {channels.email}
                   </a>
                 </dd>

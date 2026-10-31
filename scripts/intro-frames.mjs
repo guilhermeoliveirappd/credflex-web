@@ -7,9 +7,9 @@ await ctx.addCookies([{ name: "cf_consent", value: encodeURIComponent(JSON.strin
 const p = await ctx.newPage();
 const errs = []; p.on("pageerror", (e) => errs.push(e.message));
 await p.goto("http://localhost:3000/", { waitUntil: "commit" });
-await p.waitForSelector(".cf-intro", { state: "attached" });
+await p.waitForSelector("#hero-title", { state: "attached" });
 const t0 = Date.now();
-for (const t of [250, 600, 1000, 1250, 1500, 2000, 2700]) {
+for (const t of [150, 450, 800, 1050, 1250, 1500, 1900, 2600]) {
   const wait = t - (Date.now() - t0); if (wait > 0) await p.waitForTimeout(wait);
   await p.screenshot({ path: `${out}/t${t}-${w}.png` });
 }

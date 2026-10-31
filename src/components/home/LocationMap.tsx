@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { Monogram } from "@/components/brand/Monogram";
 import { CONSENT_EVENT, readConsent, type ConsentState } from "@/lib/privacy/consent";
@@ -9,20 +9,33 @@ import { site } from "@/content/site";
 const PREF_KEY = "cf_maps_ok";
 const { location } = site;
 const fullAddress = `${location.street}, ${location.district}, ${location.city} - ${location.state}, ${location.postalCode}`;
-const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(`CredFlex, ${fullAddress}`)}&hl=pt-BR&z=17&output=embed`;
-
-type State = "idle" | "loading" | "ready" | "failed";
 
 /**
- * Mapa do Google com carregamento sob demanda (privacidade):
- * nada é solicitado ao Google até o clique em "Carregar mapa" — ou
- * automaticamente se a pessoa já aceitou cookies de publicidade ou já
- * carregou o mapa antes neste navegador. Sem iframe, mostra uma prévia
- * estilizada com o endereço, que também é o fallback em caso de falha.
+ * Origem do mapa, em ordem de preferência:
+ * 1. NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL: o `src` do iframe gerado em Google Maps ›
+ *    Compartilhar › Incorporar um mapa (marcador exato do Perfil da Empresa).
+ * 2. NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY: Maps Embed API oficial (gratuita, exige chave).
+ * 3. Sem configuração: incorporação clássica sem chave, pelo endereço completo.
+ */
+export function mapEmbedSrc() {
+  const official = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL;
+  if (official) return official;
+  const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY;
+  const q = encodeURIComponent(fullAddress);
+  if (key) return `https://www.google.com/maps/embed/v1/place?key=${encodeURIComponent(key)}&q=${q}&zoom=17&language=pt-BR`;
+  return `https://maps.google.com/maps?q=${q}&z=17&hl=pt-BR&output=embed`;
+}
+
+type State = "idle" | "loading" | "ready" | "slow";
+
+/**
+ * Mapa do Google sob demanda (conteúdo de terceiros): só é solicitado ao
+ * Google após o clique, com consentimento de publicidade, ou se a pessoa já
+ * o carregou antes neste navegador. Antes disso, um painel honesto com o
+ * endereço (não imita um mapa). "Abrir no Google Maps" funciona sempre.
  */
 export function LocationMap({ className = "" }: { className?: string }) {
   const [state, setState] = useState<State>("idle");
-  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     const auto = (c: ConsentState | null) => {
@@ -38,10 +51,11 @@ export function LocationMap({ className = "" }: { className?: string }) {
     return () => window.removeEventListener(CONSENT_EVENT, onConsent);
   }, []);
 
+  // Se demorar, oferece a alternativa sem remover o iframe (ele pode terminar de carregar).
   useEffect(() => {
     if (state !== "loading") return;
-    timer.current = setTimeout(() => setState((s) => (s === "loading" ? "failed" : s)), 10_000);
-    return () => clearTimeout(timer.current);
+    const t = setTimeout(() => setState((s) => (s === "loading" ? "slow" : s)), 12_000);
+    return () => clearTimeout(t);
   }, [state]);
 
   function load() {
@@ -52,61 +66,50 @@ export function LocationMap({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={`relative overflow-hidden rounded-[var(--radius-lg)] bg-brand-900 ring-1 ring-white/10 ${className}`}>
-      {/* Prévia / fallback: sempre presente por baixo do iframe */}
-      <div aria-hidden={state === "ready"} className="absolute inset-0">
-        <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 600 480" aria-hidden>
-          <rect width="600" height="480" fill="var(--color-brand-900)" />
-          <g stroke="rgb(255 255 255 / 0.07)" strokeWidth="1">
-            {Array.from({ length: 13 }, (_, i) => (
-              <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50 - 120} y2="480" />
-            ))}
-            {Array.from({ length: 11 }, (_, i) => (
-              <line key={`h${i}`} x1="0" y1={i * 48} x2="600" y2={i * 48 + 30} />
-            ))}
-          </g>
-          <path d="M-20 300 C 150 270, 260 320, 380 250 S 560 200, 640 230" fill="none" stroke="rgb(255 255 255 / 0.16)" strokeWidth="14" />
-          <path d="M310 -10 L 280 500" fill="none" stroke="rgb(255 255 255 / 0.12)" strokeWidth="10" />
-        </svg>
-        <div className="absolute left-1/2 top-[44%] flex -translate-x-1/2 -translate-y-full flex-col items-center">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-400 text-brand-950 shadow-[0_12px_30px_-8px_rgb(252_170_6/0.6)]">
-            <Monogram className="h-7 w-7" />
-          </span>
-          <span className="-mt-1 h-3 w-3 rotate-45 bg-accent-400" />
-        </div>
-        <div className="absolute inset-x-4 bottom-20 mx-auto max-w-sm rounded-[var(--radius-md)] bg-white/95 p-3 text-center text-brand-950 shadow-lg backdrop-blur sm:bottom-24 sm:p-4">
-          <p className="no-justify hidden font-bold sm:block">{location.street}</p>
-          <p className="no-justify hidden text-[0.95rem] text-ink-2 sm:block">
-            {location.district} · {location.city} – {location.state} · CEP {location.postalCode}
+    <div className={`noise relative overflow-hidden rounded-[var(--radius-lg)] bg-brand-900 ring-1 ring-white/10 ${className}`}>
+      {/* Painel de espera / alternativa: endereço real, sem simular um mapa */}
+      <div
+        aria-hidden={state === "ready"}
+        className={`absolute inset-0 flex flex-col items-center justify-center gap-5 p-6 pb-20 text-center transition-opacity duration-500 ${state === "ready" ? "opacity-0" : "opacity-100"}`}
+      >
+        <Monogram className="h-14 w-14 text-accent-400" />
+        <div>
+          <p className="font-semibold text-white">{location.street}</p>
+          <p className="mt-0.5 text-[0.95rem] text-brand-300">
+            {location.district}, {location.city}/{location.state} · CEP {location.postalCode}
           </p>
-          {state === "idle" && (
-            <>
-              <button type="button" onClick={load} className="btn btn-brand min-h-11 w-full text-[0.95rem] sm:mt-3">
-                <MapPin aria-hidden className="h-4 w-4" /> Carregar mapa interativo
-              </button>
-              <p className="no-justify mt-2 text-[0.8rem] leading-snug text-stone">O mapa é fornecido pelo Google e pode usar cookies.</p>
-            </>
-          )}
-          {state === "failed" && <p className="no-justify mt-2 text-[0.9rem] font-semibold text-error">Não foi possível carregar o mapa agora.</p>}
         </div>
+        {state === "idle" && (
+          <div className="flex flex-col items-center gap-2">
+            <button type="button" onClick={load} className="btn btn-primary min-h-11 text-[0.95rem]">
+              <MapPin aria-hidden className="h-4 w-4" /> Mostrar mapa
+            </button>
+            <p className="max-w-[30ch] text-[0.8rem] leading-snug text-brand-300">O mapa é carregado do Google, que pode usar cookies.</p>
+          </div>
+        )}
+        {state === "loading" && (
+          <p className="text-[0.9rem] text-brand-300" role="status">
+            Carregando o mapa…
+          </p>
+        )}
+        {state === "slow" && (
+          <p className="max-w-[34ch] text-[0.9rem] text-brand-100" role="status">
+            O mapa está demorando para carregar. Use o botão abaixo para abrir a localização no Google Maps.
+          </p>
+        )}
       </div>
 
-      {(state === "loading" || state === "ready") && (
+      {state !== "idle" && (
         <iframe
-          src={embedSrc}
-          title={`Mapa: CredFlex — ${fullAddress}`}
-          loading="lazy"
+          src={mapEmbedSrc()}
+          title={`Mapa da CredFlex: ${fullAddress}`}
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
-          onLoad={() => {
-            clearTimeout(timer.current);
-            setState("ready");
-          }}
-          className={`absolute inset-0 h-full w-full border-0 transition-opacity duration-700 [filter:saturate(0.85)_contrast(1.02)] ${state === "ready" ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setState("ready")}
+          className={`absolute inset-0 h-full w-full border-0 transition-opacity duration-700 ${state === "ready" ? "opacity-100" : "opacity-0"}`}
         />
       )}
 
-      {/* Ação sempre disponível */}
       <a
         href={location.mapsUrl ?? "#"}
         target="_blank"

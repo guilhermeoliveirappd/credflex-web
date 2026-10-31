@@ -15,7 +15,8 @@ export const site = {
   legal: {
     /** Inconsistência apontada na auditoria — aguardando documento oficial. */
     razaoSocial: null as string | null,
-    cnpj: null as string | null,
+    /** Informado pela CredFlex em 31/10/2026. */
+    cnpj: "23.014.866/0001-57" as string | null,
     /** Instituições parceiras das quais a CredFlex é correspondente. */
     partners: [] as string[],
     dpo: null as { name: string; email: string } | null,
@@ -52,6 +53,9 @@ export const site = {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || null,
   },
 
+  /** Crédito de desenvolvimento no rodapé. `url` fica nulo até ser informado. */
+  credits: { name: "Max Performance Growth", url: null as string | null },
+
   antiFraudMessage: "A CredFlex não solicita depósitos antecipados para liberar crédito.",
 } as const;
 
@@ -61,7 +65,7 @@ export const roleFacts: Fact[] = [
     "Descrição do site atual. Confirmar instituições parceiras e redação com o jurídico (Res. CMN 4.935/2021).",
   ),
   pending(
-    "As condições finais — taxa de juros, prazo, valor e Custo Efetivo Total (CET) — são definidas pela instituição parceira após análise de crédito.",
+    "As condições finais (taxa de juros, prazo, valor e Custo Efetivo Total, o CET) são definidas pela instituição parceira após análise de crédito.",
   ),
   pending("A contratação depende de aprovação e não é garantida pela pré-análise."),
 ];

@@ -18,9 +18,9 @@ export default function Page() {
           title: "Categorias",
           body: (
             <ul>
-              <li><strong>Necessários</strong> — <code>cf_consent</code> (guarda suas preferências, 6 meses). Sempre ativos.</li>
-              <li><strong>Medição</strong> — ferramentas de analytics (ex.: Google Analytics 4 via Google Tag Manager), somente após consentimento. [Lista definitiva a confirmar.]</li>
-              <li><strong>Publicidade</strong> — pixels de mídia, somente após consentimento. [Lista definitiva a confirmar.]</li>
+              <li><strong>Necessários:</strong> <code>cf_consent</code> (guarda suas preferências, 6 meses). Sempre ativos.</li>
+              <li><strong>Medição:</strong> ferramentas de analytics (ex.: Google Analytics 4 via Google Tag Manager), somente após consentimento. [Lista definitiva a confirmar.]</li>
+              <li><strong>Publicidade:</strong> pixels de mídia, somente após consentimento. [Lista definitiva a confirmar.]</li>
             </ul>
           ),
         },

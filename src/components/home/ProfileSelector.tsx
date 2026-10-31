@@ -98,9 +98,7 @@ export function ProfileSelector() {
             <h2 id="perfil-title" data-reveal="title" className="t-h2 text-white">
               Qual dessas opções combina com você?
             </h2>
-            <p className="mt-5 max-w-[46ch] text-[1.08rem] leading-relaxed text-brand-100">
-              Cada modalidade tem regras próprias. Escolher o caminho certo desde o início evita perguntas desnecessárias.
-            </p>
+            <p className="mt-4 text-[1.08rem] text-brand-100">Escolha a situação mais parecida com a sua.</p>
           </div>
           {/* Controles: posição + setas */}
           <div className="flex items-center gap-5">
@@ -248,7 +246,7 @@ export function ProfileSelector() {
           ) : (
             <p className="flex items-center gap-3 border-t border-white/12 pt-7 text-brand-300">
               <span className="fbars" aria-hidden />
-              Selecione a situação mais parecida com a sua para ver o próximo passo.
+              Selecione uma opção para continuar.
             </p>
           )}
         </div>

@@ -185,3 +185,33 @@ Os estados iniciais só existem com `html.js`. Uma rede de segurança revela tod
 
 ## Textura
 A classe `.noise` aplica um film grain SVG (feTurbulence) em tile de 180px, com opacidade de 7,5% e `mix-blend-mode: screen`, atrás do conteúdo (z-index -1 em contexto isolado). Está aplicada a todas as superfícies roxas: faixa antifraude, header, seletor, institucional, localização, etapas dos produtos, CTA roxo, heros roxos, cartões roxos e rodapé.
+
+## Revisão v4 (enxugamento)
+
+### Hero
+- **Headline:** "Crédito com gente de verdade." Foi escolhida entre 3 alternativas, documentadas em `Hero.tsx`.
+- **Texto e ação:** uma frase de 11 palavras e um único CTA, "Consultar meu crédito" → `/simulacao`.
+- **Visual:** o símbolo oficial em grande escala, sangrando à direita, com um eco do próprio símbolo rotacionado 14°. Saiu a foto, que era só um espaço vazio.
+
+### Abertura ("inversão", cerca de 1,65s)
+1. **0–0,8s, só CSS:** três camadas do símbolo sólido (roxo 700, roxo 800 e amarelo) entram em espiral e se fundem em uma.
+2. **0,85–1,65s, JS com as coordenadas reais:** o símbolo viaja até o símbolo do hero, invertendo de amarelo para roxo, enquanto a cortina roxa sobe e revela o amarelo. O texto do hero sobe em 0,26s.
+
+Comportamento:
+- **Sem strokes:** o efeito de "desenho" anterior gerava tracinhos soltos e foi removido de todo o site, inclusive do `CFPath`.
+- **Repetição:** uma vez por sessão; é pulada com movimento reduzido.
+- **Rede de segurança:** sem JS, a abertura some sozinha em 2,6s.
+- **Trade-off medido:** o LCP de laboratório fica entre 3,1 e 3,7s, porque o hero só aparece após a revelação.
+
+### Texto justificado
+- É **opt-in**, pela classe `.support-text` ou pelo atributo `[data-support]`, e só em parágrafos longos: explicação dos produtos, Quem somos, Segurança, Contato, respostas do FAQ, glossário e documentos legais.
+- **Sem hifenização:** `hyphens: none`, com `html { hyphens: manual }` no site inteiro. A quebra acontece só entre palavras (`word-break` e `overflow-wrap` normais) e a última linha fica à esquerda.
+- **Limites:** largura máxima de 68ch; abaixo de 480px o texto fica alinhado à esquerda.
+- A origem do `hyphens: auto` anterior era uma regra global no próprio `globals.css`, já removida. Nenhuma biblioteca aplicava hifenização.
+
+### Rodapé
+- **Estrutura:** marca, uma coluna "Institucional" (com "Modalidades" em acordeão `<details>`) e uma coluna "Ajuda e contato".
+- **E-mail:** em uma linha (`whitespace-nowrap`).
+- **Área legal:** centralizada, com 0,8rem e no máximo 72ch.
+- **Linha final:** © + CNPJ à esquerda, "Desenvolvido por Max Performance Growth" à direita. O link fica em `site.credits.url`, hoje nulo.
+- **Endereço:** removido da base do rodapé.

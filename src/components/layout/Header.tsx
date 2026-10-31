@@ -56,7 +56,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
       }`}
     >
       <div className="container-x flex h-[var(--header-h)] items-center gap-6">
-        <Link href="/" className="flex-none rounded-sm" aria-label="CredFlex — página inicial">
+        <Link href="/" className="flex-none rounded-sm" aria-label="CredFlex, página inicial">
           <Logo />
         </Link>
 

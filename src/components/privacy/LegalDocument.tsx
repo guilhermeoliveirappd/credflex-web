@@ -55,7 +55,7 @@ export function LegalDocument({
                     <span className="t-num mr-2 text-brand-500">{i + 1}.</span>
                     {s.title}
                   </h2>
-                  <div className="mt-4 space-y-4 text-ink-2 [&_li]:ml-5 [&_li]:list-disc [&_ul]:space-y-2">{s.body}</div>
+                  <div data-support className="mt-4 space-y-4 text-ink-2 [&_li]:ml-5 [&_li]:list-disc [&_ul]:space-y-2">{s.body}</div>
                 </section>
               ))}
             </div>

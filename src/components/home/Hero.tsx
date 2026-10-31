@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
-import { CFPath } from "@/components/brand/CFPath";
-import { PhotoSlot } from "@/components/brand/PhotoSlot";
-import { photos } from "@/content/photos";
+import { ArrowRight } from "lucide-react";
+import { Monogram } from "@/components/brand/Monogram";
 
-const words = ["Antes", "do", "crédito,", "uma", "conversa"];
+/*
+ * Headline — alternativas avaliadas (3 a 6 palavras):
+ *  1. "Crédito com gente de verdade."  ← escolhida: diz o que é (crédito) e o
+ *     diferencial real (atendimento humano); 5 palavras, quebra bem em 2–3 linhas.
+ *  2. "Crédito explicado, pessoa a pessoa." — boa, mas "explicado" soa didático.
+ *  3. "Seu crédito começa numa conversa." — mais longa no mobile e menos direta.
+ */
+const words = ["Crédito", "com", "gente"];
 
-/** Palavra com máscara: sobe de dentro da própria linha (reveal tipográfico). */
 function Word({ i, children }: { i: number; children: React.ReactNode }) {
   return (
     <span className="hero-word">
@@ -18,57 +22,39 @@ function Word({ i, children }: { i: number; children: React.ReactNode }) {
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden bg-accent-400">
-      <div className="container-x relative grid gap-10 pb-14 pt-10 sm:pt-14 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-20">
-        <div className="relative z-10 lg:col-span-7 lg:pr-6">
-          <h1 id="hero-title" className="t-display text-brand-950">
+    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-accent-400">
+      {/* Composição: o símbolo oficial em grande escala, sangrando à direita.
+          É o ponto de chegada da animação de abertura (data-hero-mark). */}
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full lg:w-[58%]">
+        <div className="hero-mark-echo absolute -right-[20vw] -bottom-[30vw] w-[96vw] text-brand-900/10 sm:-right-[14%] sm:-bottom-[22vw] sm:w-[70%] lg:-right-[8%] lg:bottom-auto lg:top-1/2 lg:w-[92%] lg:-translate-y-[46%]">
+          <Monogram className="h-auto w-full rotate-[14deg]" />
+        </div>
+        <div className="absolute -right-[24vw] -bottom-[26vw] w-[90vw] sm:-right-[16%] sm:-bottom-[18vw] sm:w-[64%] lg:-right-[10%] lg:bottom-auto lg:top-1/2 lg:w-[86%] lg:-translate-y-1/2">
+          <div data-hero-mark className="hero-mark text-brand-900">
+            <Monogram className="h-auto w-full" />
+          </div>
+        </div>
+      </div>
+
+      <div className="container-x flex flex-col justify-start pb-[72vw] pt-12 sm:pb-[48vw] sm:pt-16 lg:min-h-[640px] lg:justify-center lg:py-24">
+        <div>
+          <h1 id="hero-title" className="t-display max-w-[6.6em] text-brand-950 !text-[clamp(3rem,1.6rem+6.4vw,7.25rem)] !leading-[0.92]">
             {words.map((w, i) => (
               <Fragment key={w}>
                 <Word i={i}>{w}</Word>{" "}
               </Fragment>
             ))}
-            <span className="relative inline-block whitespace-nowrap text-brand-800">
-              <Word i={words.length}>de</Word> <Word i={words.length + 1}>verdade.</Word>
-              <svg aria-hidden viewBox="0 0 300 18" preserveAspectRatio="none" className="hero-underline absolute -bottom-[0.12em] left-0 h-[0.16em] w-full">
-                <path d="M0 4h300M0 14h190" stroke="var(--color-brand-900)" strokeWidth="5" fill="none" />
-              </svg>
-            </span>
+            <Word i={3}>de</Word> <Word i={4}>verdade.</Word>
           </h1>
-          <p className="hero-in no-justify t-lead mt-8 max-w-[38ch] text-brand-950" style={{ ["--d" as string]: "380ms" }}>
-            Você conta a sua situação. Uma pessoa da nossa equipe explica quais modalidades fazem sentido, com taxas e
-            custos por escrito, antes de qualquer decisão.
-          </p>
-          <div className="hero-in mt-9 flex flex-col gap-3 xs:flex-row xs:items-center" style={{ ["--d" as string]: "520ms" }}>
-            <Link href="/simulacao" className="btn btn-brand text-[1.05rem]" data-cta="hero_prequal">
-              Iniciar pré-análise
-              <ArrowRight aria-hidden className="btn-arrow h-5 w-5" />
-            </Link>
-            <a href="#perfil" className="btn btn-ghost text-brand-950">
-              Descobrir minha modalidade
-              <ArrowDown aria-hidden className="h-4 w-4" />
-            </a>
-          </div>
-          <p className="hero-in t-small mt-6 flex items-center gap-2 font-semibold text-brand-950" style={{ ["--d" as string]: "640ms" }}>
-            <span className="h-1.5 w-1.5 flex-none rounded-full bg-brand-900" aria-hidden />
-            Sem compromisso: a pré-análise não é uma contratação.
-          </p>
         </div>
-
-        <div className="relative lg:col-span-5">
-          {/* Arco do "C" recortando a fotografia */}
-          <div className="relative mx-auto max-w-[520px] lg:mt-2">
-            <div className="hero-photo rounded-[var(--radius-md)] rounded-tl-[42%]">
-            <PhotoSlot
-              priority
-              tone="navy"
-              src={photos.atendimento.src ?? undefined}
-              alt={photos.atendimento.alt}
-              brief={photos.atendimento.brief}
-              className="aspect-[16/11] rounded-[var(--radius-md)] rounded-tl-[42%] sm:aspect-[4/3] lg:aspect-[4/5]"
-            />
-            </div>
-            <CFPath className="pointer-events-none absolute -left-[38%] top-[8%] hidden w-[120%] opacity-90 lg:block" stroke="var(--color-brand-900)" animate weight={1.6} />
-          </div>
+        <p className="hero-in mt-7 max-w-[32ch] text-[1.15rem] leading-snug text-brand-950 sm:text-[1.3rem]" style={{ ["--d" as string]: "320ms" }}>
+          Consignado, FGTS e outras modalidades, com atendimento humano em Osvaldo Cruz.
+        </p>
+        <div className="hero-in mt-9" style={{ ["--d" as string]: "440ms" }}>
+          <Link href="/simulacao" className="btn btn-brand min-h-[58px] px-7 text-[1.08rem]" data-cta="hero_prequal">
+            Consultar meu crédito
+            <ArrowRight aria-hidden className="btn-arrow h-5 w-5" />
+          </Link>
         </div>
       </div>
     </section>

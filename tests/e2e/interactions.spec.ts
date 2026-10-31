@@ -72,25 +72,58 @@ test.describe("seletor de perfil (carrossel)", () => {
 test.describe("mapa", () => {
   test("não carrega o Google sem ação; carrega após clique com o endereço correto", async ({ page }) => {
     await consent(page);
-    await page.route("https://www.google.com/**", (r) => r.fulfill({ status: 200, contentType: "text/html", body: "<html><body>mapa</body></html>" }));
+    await page.route(/https:\/\/(maps|www)\.google\.com(\.br)?\//, (r) => r.fulfill({ status: 200, contentType: "text/html", body: "<html><body>mapa</body></html>" }));
     await page.goto("/");
     const section = page.locator("section[aria-labelledby='local-title']");
     await section.scrollIntoViewIfNeeded();
     await expect(section.locator("iframe")).toHaveCount(0);
     const open = section.getByRole("link", { name: /Abrir no Google Maps/ });
     await expect(open).toHaveAttribute("href", /Rua\+Fernando\+Costa%2C\+495.*Osvaldo\+Cruz.*17700-000/);
-    await section.getByRole("button", { name: "Carregar mapa interativo" }).click();
+    await section.getByRole("button", { name: "Mostrar mapa" }).click();
     const iframe = section.locator("iframe");
     await expect(iframe).toHaveAttribute("src", /Rua%20Fernando%20Costa%2C%20495%2C%20Centro%2C%20Osvaldo%20Cruz%20-%20SP%2C%2017700-000/);
-    await expect(iframe).toHaveAttribute("loading", "lazy");
+    await expect(iframe).toHaveAttribute("src", /^https:\/\/maps\.google\.com\/maps\?/);
   });
 
   test("com consentimento de publicidade carrega automaticamente", async ({ page }) => {
     await consent(page, true);
-    await page.route("https://www.google.com/**", (r) => r.fulfill({ status: 200, contentType: "text/html", body: "ok" }));
+    await page.route(/https:\/\/(maps|www)\.google\.com(\.br)?\//, (r) => r.fulfill({ status: 200, contentType: "text/html", body: "ok" }));
     await page.goto("/");
     await expect(page.locator("section[aria-labelledby='local-title'] iframe")).toHaveCount(1);
   });
+});
+
+test("hero com um único CTA principal", async ({ page }) => {
+  await consent(page);
+  await page.goto("/");
+  const hero = page.locator("section[aria-labelledby='hero-title']");
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveText(/Crédito com gente de verdade\./);
+  await expect(hero.getByRole("link")).toHaveCount(1);
+  await hero.getByRole("link", { name: /Consultar meu crédito/ }).click();
+  await expect(page).toHaveURL(/\/simulacao$/);
+});
+
+test("rodapé: modalidades em acordeão, e-mail em uma linha, sem endereço", async ({ page }) => {
+  await consent(page);
+  await page.goto("/");
+  const footer = page.locator("footer");
+  const link = footer.getByRole("link", { name: "Consignado CLT" });
+  await expect(link).toBeHidden();
+  await footer.getByText("Modalidades", { exact: true }).click();
+  await expect(link).toBeVisible();
+  const email = footer.getByRole("link", { name: "atendimento@credflexfinanceira.com.br" });
+  const box = await email.boundingBox();
+  expect(box!.height).toBeLessThan(44); // 1 linha ≈ 32px (24 + padding); 2 linhas ≈ 56px
+  await expect(footer).not.toContainText("Rua Fernando Costa");
+  await expect(footer).toContainText("CNPJ 23.014.866/0001-57");
+  await expect(footer).toContainText("Desenvolvido por Max Performance Growth");
+});
+
+test("textos sem hifenização automática", async ({ page }) => {
+  await consent(page);
+  await page.goto("/quem-somos");
+  const hyph = await page.evaluate(() => [...document.querySelectorAll("p, dd, [data-support]")].filter((e) => getComputedStyle(e).hyphens === "auto").length);
+  expect(hyph).toBe(0);
 });
 
 test("cards de modalidade compactos levam à página interna", async ({ page }) => {

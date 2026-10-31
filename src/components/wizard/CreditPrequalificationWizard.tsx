@@ -752,7 +752,7 @@ const errorCopy: Record<string, { title: string; text: string }> = {
   rate_limited: { title: "Muitas tentativas em pouco tempo", text: "Aguarde alguns minutos e tente novamente. Suas respostas continuam aqui." },
   unavailable: {
     title: "Não conseguimos registrar sua solicitação agora",
-    text: "O problema é do nosso lado. Suas respostas continuam aqui — tente novamente em instantes.",
+    text: "O problema é do nosso lado. Suas respostas continuam aqui. Tente novamente em instantes.",
   },
   network: { title: "Sem conexão", text: "Verifique sua internet e tente novamente. Suas respostas continuam aqui." },
   invalid: { title: "Alguns dados precisam de ajuste", text: "Revise as informações de contato e tente novamente." },

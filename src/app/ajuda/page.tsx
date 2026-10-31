@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { PageHero } from "@/components/ui/PageHero";
-import { homeFaq } from "@/content/institutional";
+import { generalFaq } from "@/content/institutional";
 import { activeProducts } from "@/content/products";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const glossary = [
-  ["CET — Custo Efetivo Total", "Soma de juros, tarifas, tributos e seguros, expressa como taxa. É o melhor número para comparar propostas."],
+  ["CET (Custo Efetivo Total)", "Soma de juros, tarifas, tributos e seguros, expressa como taxa. É o melhor número para comparar propostas."],
   ["Margem consignável", "Parte da renda ou do benefício que pode ser comprometida com parcelas descontadas em folha ou no benefício."],
   ["Correspondente bancário", "Empresa contratada por instituições financeiras para apresentar e intermediar produtos, como crédito."],
   ["Portabilidade", "Transferência de um contrato de crédito existente para outra instituição, que pode oferecer condições diferentes."],
@@ -52,7 +52,7 @@ export default function AjudaPage() {
           <div className="space-y-16 lg:col-span-8 lg:col-start-5">
             <div id="geral">
               <h2 id="geral-title" className="t-h3 mb-6 text-brand-950">Dúvidas gerais</h2>
-              <FAQAccordion items={homeFaq} />
+              <FAQAccordion items={generalFaq} />
             </div>
             {activeProducts.filter((p) => p.faq.length).map((p) => (
               <div key={p.slug} id={`faq-${p.slug}`}>
