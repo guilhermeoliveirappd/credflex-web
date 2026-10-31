@@ -94,7 +94,7 @@ export function Footer() {
                 Razão social e CNPJ: aguardando documento oficial.
               </>
             )}
-            {location.street && ` · ${location.street}, ${location.city}/${location.state}`}
+            {location.street && ` · ${location.street}, ${location.district} — ${location.city}/${location.state}, CEP ${location.postalCode}`}
           </p>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <ul className="flex flex-wrap gap-x-5 gap-y-2">

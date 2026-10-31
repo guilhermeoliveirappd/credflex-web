@@ -23,16 +23,31 @@ export default function AjudaPage() {
   return (
     <>
       <PageHero crumb="Ajuda" path="/ajuda" title="Como podemos ajudar?" lead="Dúvidas gerais, perguntas por modalidade e um pequeno glossário para entender os termos do crédito." />
-      <section aria-labelledby="geral-title" className="bg-paper pb-[var(--section-y)]">
+      <section aria-labelledby="geral-title" className="bg-paper py-[var(--section-y)]">
         <div className="container-x grid gap-14 lg:grid-cols-12">
           <nav aria-label="Seções da ajuda" className="lg:col-span-3">
-            <ul className="space-y-1 lg:sticky lg:top-[calc(var(--header-h)+32px)]">
-              <li><a href="#geral" className="flex min-h-11 items-center font-semibold text-brand-800 hover:underline">Dúvidas gerais</a></li>
-              {activeProducts.filter((p) => p.faq.length).map((p) => (
-                <li key={p.slug}><a href={`#faq-${p.slug}`} className="flex min-h-11 items-center text-ink-2 hover:text-brand-800 hover:underline">{p.name}</a></li>
-              ))}
-              <li><a href="#glossario" className="flex min-h-11 items-center font-semibold text-brand-800 hover:underline">Glossário</a></li>
-            </ul>
+            <div className="rounded-[var(--radius-md)] bg-paper-2 p-4 sm:p-6 lg:sticky lg:top-[calc(var(--header-h)+32px)]">
+              <p className="mb-3 px-3 text-[0.85rem] font-semibold uppercase tracking-[0.08em] text-stone">Nesta página</p>
+              <ul className="space-y-1">
+                <li>
+                  <a href="#geral" className="flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 py-2 font-semibold text-brand-900 transition-colors hover:bg-white">
+                    Dúvidas gerais
+                  </a>
+                </li>
+                {activeProducts.filter((p) => p.faq.length).map((p) => (
+                  <li key={p.slug}>
+                    <a href={`#faq-${p.slug}`} className="flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 py-2 leading-snug text-ink-2 transition-colors hover:bg-white hover:text-brand-900">
+                      {p.name}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a href="#glossario" className="flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 py-2 font-semibold text-brand-900 transition-colors hover:bg-white">
+                    Glossário
+                  </a>
+                </li>
+              </ul>
+            </div>
           </nav>
           <div className="space-y-16 lg:col-span-8 lg:col-start-5">
             <div id="geral">
@@ -53,7 +68,7 @@ export default function AjudaPage() {
                 {glossary.map(([t, d]) => (
                   <div key={t} className="grid gap-2 py-5 sm:grid-cols-[14rem_1fr]">
                     <dt className="font-bold text-brand-950">{t}</dt>
-                    <dd className="text-ink-2">{d}</dd>
+                    <dd data-support className="text-ink-2">{d}</dd>
                   </div>
                 ))}
               </dl>

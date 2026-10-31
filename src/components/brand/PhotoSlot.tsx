@@ -14,6 +14,7 @@ export function PhotoSlot({
   tone = "navy",
   priority = false,
   sizes = "(min-width: 1024px) 40vw, 100vw",
+  focus = "50% 50%",
 }: {
   src?: string;
   alt: string;
@@ -23,11 +24,15 @@ export function PhotoSlot({
   tone?: "navy" | "sand" | "gold";
   priority?: boolean;
   sizes?: string;
+  /** object-position do recorte */
+  focus?: string;
 }) {
   if (src) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
+        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: focus }} />
+        {/* Leve vinheta para integrar a foto às superfícies da marca */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/25 via-transparent to-transparent" />
       </div>
     );
   }

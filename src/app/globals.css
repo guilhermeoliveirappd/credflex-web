@@ -94,6 +94,32 @@
 
   h1, h2, h3, h4 { text-wrap: balance; }
   p { text-wrap: pretty; }
+
+  /*
+   * Textos de apoio justificados (parágrafos corridos, descrições, respostas).
+   * Hifenização em pt-BR evita "rios" de espaço em colunas estreitas.
+   * Não se aplica a títulos, botões, menus, rótulos e elementos de interface.
+   */
+  :where(:where(main, footer) p:not(.no-justify, .text-center, .t-eyebrow, .field-help, .field-error, .font-bold, [class*="font-[family-name"])),
+  :where(main [data-support]) {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphenate-limit-chars: 7 3 3;
+  }
+  /*
+   * Celulares (< 480px): medidas curtas geram "rios" de espaço no justificado.
+   * Cartões estreitos, textos com largura limitada, textos pequenos e rodapé
+   * voltam ao alinhamento à esquerda; parágrafos de largura total seguem justificados.
+   */
+  @media (max-width: 479px) {
+    :where(main) :is(.col-span-3, .grid-cols-2) p,
+    :where(main) p:is([class*="max-w-[30ch]"], [class*="max-w-[32ch]"], .t-small, [class*="text-[0.9"]),
+    :where(footer) p {
+      text-align: left;
+    }
+  }
   a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 }
 

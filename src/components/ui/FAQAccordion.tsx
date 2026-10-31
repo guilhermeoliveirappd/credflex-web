@@ -24,7 +24,7 @@ export function FAQAccordion({ items, emitJsonLd = true, tone = "white" }: { ite
               <Plus aria-hidden className="h-4 w-4" />
             </span>
           </summary>
-          <div className={`max-w-[68ch] pb-6 pr-14 ${onAccent ? "text-brand-950" : "text-ink-2"}`}>{item.a}</div>
+          <div data-support className={`max-w-[68ch] pb-6 pr-14 ${onAccent ? "text-brand-950" : "text-ink-2"}`}>{item.a}</div>
         </details>
       ))}
       {/* Somente respostas confirmadas viram dados estruturados. */}

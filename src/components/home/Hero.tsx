@@ -2,8 +2,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { CFPath } from "@/components/brand/CFPath";
 import { PhotoSlot } from "@/components/brand/PhotoSlot";
-import { ReviewMark } from "@/components/brand/ReviewMark";
-import { site } from "@/content/site";
+import { photos } from "@/content/photos";
 
 export function Hero() {
   return (
@@ -45,19 +44,12 @@ export function Hero() {
             <PhotoSlot
               priority
               tone="navy"
-              alt="Equipe da CredFlex atendendo um cliente no escritório de Osvaldo Cruz"
-              brief="Atendimento real no escritório (equipe + cliente com autorização de imagem). Retrato 4:5, mín. 1600 px."
+              src={photos.atendimento.src ?? undefined}
+              alt={photos.atendimento.alt}
+              brief={photos.atendimento.brief}
               className="aspect-[16/11] rounded-[var(--radius-md)] rounded-tl-[42%] sm:aspect-[4/3] lg:aspect-[4/5]"
             />
             <CFPath className="pointer-events-none absolute -left-[38%] top-[8%] hidden w-[120%] opacity-90 lg:block" stroke="var(--color-brand-900)" animate weight={1.6} />
-            <div className="absolute -bottom-5 left-4 right-4 flex items-end justify-between gap-3 sm:left-auto sm:right-6 sm:max-w-[300px] lg:-left-10 lg:right-auto">
-              <div className="rounded-[var(--radius-sm)] bg-white px-4 py-3 shadow-[0_18px_40px_-24px_rgb(8_20_40/0.45)]">
-                <p className="font-semibold leading-snug text-brand-950">
-                  Atendimento presencial em {site.location.city}/{site.location.state}{" "}
-                  <ReviewMark note={site.location.note} />
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

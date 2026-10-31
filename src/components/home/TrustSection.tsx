@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { PhotoSlot } from "@/components/brand/PhotoSlot";
 import { ReviewMark } from "@/components/brand/ReviewMark";
 import { milestones } from "@/content/institutional";
+import { photos } from "@/content/photos";
 import { showReviewMarkers, site } from "@/content/site";
 
 export function InstitutionalTimeline({ tone = "dark" }: { tone?: "dark" | "light" }) {
@@ -26,57 +28,80 @@ export function InstitutionalTimeline({ tone = "dark" }: { tone?: "dark" | "ligh
 }
 
 export function TrustSection() {
+  const { location } = site;
+  const hasMilestones = milestones.some((m) => m.status === "confirmed" || showReviewMarkers);
   return (
     <section aria-labelledby="confianca-title" className="bg-brand-900 py-[var(--section-y)] text-white">
       <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-6">
-            <h2 id="confianca-title" className="t-h2 text-white">
-              Crédito com gente de verdade por trás.
-            </h2>
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 lg:pt-14">
-            <p className="t-lead text-brand-100">
-              A CredFlex é uma empresa de {site.location.city}, no interior de São Paulo
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <h2 id="confianca-title" className="t-h2 text-white lg:col-span-6">
+            Crédito com gente de verdade por trás.
+          </h2>
+          <div className="lg:col-span-5 lg:col-start-8">
+            <p className="text-[1.08rem] leading-relaxed text-brand-100">
+              A CredFlex é uma empresa de {location.city}, no interior de São Paulo
               {site.history.foundedYear ? `, com atividades desde ${site.history.foundedYear}` : ""}.{" "}
               <ReviewMark note={site.history.note} /> Quem atende você tem nome, rosto e endereço — e responde pelo que
               explica.
             </p>
-            <Link href="/quem-somos" className="link-arrow mt-6 text-accent-300">
+            <Link href="/quem-somos" className="link-arrow mt-4 text-accent-300">
               Conheça a nossa história
             </Link>
           </div>
         </div>
 
-        {/* Mosaico editorial: escalas diferentes, nunca três cards iguais */}
-        <div className="mt-14 grid grid-cols-6 gap-3 sm:gap-4 lg:h-[640px] lg:grid-cols-12 lg:grid-rows-[3fr_2fr]">
+        {/* Mosaico compacto: fachada em destaque + blocos com informação real */}
+        <div className="mt-12 grid grid-cols-6 gap-3 sm:gap-4 lg:h-[400px] lg:grid-cols-12 lg:grid-rows-2">
           <PhotoSlot
-            alt="Equipe CredFlex reunida no escritório"
-            brief="Foto de equipe real, horizontal 3:2, com autorização de uso de imagem de cada pessoa."
-            className="col-span-6 aspect-[3/2] rounded-[var(--radius-md)] lg:col-span-7 lg:row-span-2 lg:aspect-auto lg:h-full"
-            tone="sand"
+            src={photos.fachada.src ?? undefined}
+            alt={photos.fachada.alt}
+            brief={photos.fachada.brief}
+            focus={photos.fachada.focus}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="col-span-6 aspect-[16/10] rounded-[var(--radius-md)] lg:row-span-2 lg:aspect-auto lg:h-full"
+            tone="navy"
           />
-          <PhotoSlot
-            alt="Porta-voz da CredFlex"
-            brief="Retrato do(a) porta-voz/fundador(a), vertical 4:5."
-            className="col-span-3 aspect-[4/5] rounded-[var(--radius-md)] lg:col-span-3 lg:aspect-auto lg:h-full"
-            tone="gold"
-          />
-          <div className="col-span-3 flex flex-col justify-between rounded-[var(--radius-md)] bg-accent-400 p-5 text-brand-950 sm:p-6 lg:col-span-2">
+          <div className="col-span-3 flex min-h-[170px] flex-col justify-between rounded-[var(--radius-md)] bg-accent-400 p-5 text-brand-950 sm:p-6">
             <span className="fbars fbars-brand" aria-hidden />
-            <p className="font-[family-name:var(--font-display)] text-[1.35rem] font-semibold leading-tight sm:text-2xl">
+            <p className="no-justify font-[family-name:var(--font-display)] text-[1.2rem] font-semibold leading-tight sm:text-[1.45rem]">
               Atendimento humano, do primeiro contato à proposta.
             </p>
           </div>
+          <div className="col-span-3 flex min-h-[170px] flex-col justify-between rounded-[var(--radius-md)] bg-brand-800 p-5 sm:p-6">
+            <p className="text-[0.95rem] text-brand-100">Em atividade desde</p>
+            <p className="t-num no-justify font-[family-name:var(--font-display)] text-[3rem] font-semibold leading-none text-accent-400 sm:text-[3.6rem]">
+              {site.history.foundedYear} <ReviewMark note={site.history.note} />
+            </p>
+          </div>
           <PhotoSlot
-            alt="Detalhe do atendimento no escritório da CredFlex"
-            brief="Detalhe do ambiente de atendimento (mesa, recepção), horizontal."
-            className="col-span-6 aspect-[16/9] rounded-[var(--radius-md)] lg:col-span-5 lg:aspect-auto lg:h-full"
-            tone="navy"
+            src={photos.atendimento.src ?? undefined}
+            alt={photos.atendimento.alt}
+            brief={photos.atendimento.brief}
+            sizes="(min-width: 1024px) 25vw, 50vw"
+            className="col-span-3 aspect-square rounded-[var(--radius-md)] lg:aspect-auto lg:h-full"
+            tone="gold"
           />
+          <a
+            href={location.mapsUrl ?? "/contato"}
+            target={location.mapsUrl ? "_blank" : undefined}
+            rel={location.mapsUrl ? "noopener noreferrer" : undefined}
+            className="group col-span-3 flex flex-col justify-between rounded-[var(--radius-md)] bg-white p-5 text-brand-950 transition-colors hover:bg-brand-100 sm:p-6"
+          >
+            <MapPin aria-hidden className="h-6 w-6 text-brand-700" />
+            <span>
+              <span className="block font-bold leading-snug">{location.street}</span>
+              <span className="block text-[0.95rem] text-ink-2">
+                {location.district} · {location.city}/{location.state}
+              </span>
+              <span className="mt-2 inline-flex items-center gap-1 text-[0.92rem] font-semibold text-brand-800 group-hover:underline">
+                Como chegar <ArrowUpRight aria-hidden className="h-4 w-4" />
+              </span>
+            </span>
+          </a>
         </div>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-12">
+        {hasMilestones && (
+        <div className="mt-14 grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <h3 className="t-h3 text-white">Trajetória</h3>
             <p className="mt-3 max-w-[30ch] text-brand-100">Os marcos abaixo serão publicados somente após confirmação da CredFlex.</p>
@@ -85,6 +110,7 @@ export function TrustSection() {
             <InstitutionalTimeline tone="light" />
           </div>
         </div>
+        )}
       </div>
     </section>
   );

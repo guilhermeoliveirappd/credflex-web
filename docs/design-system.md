@@ -138,3 +138,11 @@ Eyebrows e categorias acima das headlines foram **removidos**. Rótulos funciona
 - o estado desabilitado do WhatsApp quando não há número oficial.
 
 Os marcadores ocultos **não** tornam o conteúdo validado: o `launch-checklist.md` exige resolver cada pendência.
+
+## Texto de apoio justificado
+- Parágrafos corridos (`main p`, `footer p`) e blocos marcados com `data-support` (respostas do FAQ, glossário) são justificados com hifenização pt-BR (`globals.css`).
+- Excluídos: títulos, botões, menus, labels, breadcrumbs, ajuda/erro de formulário, parágrafos em negrito (mini-títulos) e textos com a fonte display. Para excluir manualmente, use `.no-justify`.
+- Em telas abaixo de 480px voltam à esquerda: cartões estreitos (`col-span-3`, `grid-cols-2`), textos com largura curta (`max-w-[30ch]`), textos pequenos e o rodapé. Nesses casos o justificado gerava espaços irregulares.
+
+## Fotografia
+Registro central em `src/content/photos.ts`. Cada foto tem `alt`, especificação (`brief`) e ponto focal (`focus` → `object-position`). As imagens usam `next/image` com `object-fit: cover`, `sizes` responsivo e uma vinheta sutil em roxo na base, para integrar a foto às superfícies da marca.

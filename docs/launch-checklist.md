@@ -5,13 +5,15 @@ Nada abaixo foi validado pela CredFlex. Itens **[BLOQUEANTE]** impedem a publica
 ## Institucional e jurídico
 - [ ] **[BLOQUEANTE]** Razão social e CNPJ oficiais (a auditoria aponta inconsistência) → `site.legal`
 - [ ] **[BLOQUEANTE]** Lista de instituições parceiras e redação do papel de correspondente (Res. CMN 4.935/2021) → `roleFacts`, rodapé, Transparência
-- [ ] **[BLOQUEANTE]** Canais oficiais únicos: WhatsApp, telefone, e-mail, Instagram → variáveis `NEXT_PUBLIC_*`
+- [x] Canais oficiais: WhatsApp (18) 98160-5017 e atendimento@credflexfinanceira.com.br (informados em 31/10/2026) → `site.channels`
+- [ ] Telefone fixo completo (recebido incompleto: "(18) 3529-2…") → `NEXT_PUBLIC_PHONE_NUMBER`
 - [ ] **[BLOQUEANTE]** Políticas de privacidade, cookies e termos revisadas pelo jurídico; remover `draft` de `LegalDocument`
 - [ ] **[BLOQUEANTE]** Encarregado(a)/DPO e canal de direitos do titular
 - [ ] Texto e versão do consentimento de contato/marketing aprovados (`CONSENT_TEXT_VERSION`)
 - [ ] Mensagem antifraude validada
 - [ ] Ano de fundação (2017) e marcos da linha do tempo
-- [ ] Endereço completo, CEP, horário e link do mapa → `site.location`
+- [x] Endereço: Rua Fernando Costa, 495, Centro, Osvaldo Cruz – SP, CEP 17700-000 → `site.location`
+- [ ] Horário de atendimento → `site.location.openingHours`
 - [ ] Base legal para atribuição de UTMs ao lead
 
 ## Comercial / produtos
@@ -23,7 +25,8 @@ Nada abaixo foi validado pela CredFlex. Itens **[BLOQUEANTE]** impedem a publica
 - [ ] Simulação numérica: somente com tabelas vigentes + aprovação jurídica
 
 ## Fotografia
-- [ ] Fotos reais com termo de autorização de imagem: atendimento (hero), equipe, porta-voz, ambiente, fachada, atendimento INSS (lista completa nos `brief` de cada `PhotoSlot`)
+- [ ] **Foto da fachada** (não recebida nesta sessão) e foto de atendimento → `public/images/institucional/` + `src/content/photos.ts` (instruções em `public/images/institucional/LEIA-ME.txt`)
+- [ ] Demais fotos reais com termo de autorização de imagem (atendimento INSS na página do produto)
 - [x] HEX oficiais aplicados: roxo `#0A0C3C`, amarelo `#FCAA06`
 - [ ] Logotipo em vetor original (AI/SVG) para substituir a vetorização do PNG; validar a versão horizontal com o manual de marca
 

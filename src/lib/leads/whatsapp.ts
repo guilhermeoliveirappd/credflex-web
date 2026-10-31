@@ -1,7 +1,8 @@
 import { products, type ProductSlug } from "@/content/products";
+import { site } from "@/content/site";
 
 /** Número oficial (somente dígitos, com DDI) ou null se não configurado. */
-export function officialWhatsapp(value = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER): string | null {
+export function officialWhatsapp(value: string | null = site.channels.whatsapp): string | null {
   const d = (value ?? "").replace(/\D/g, "");
   return d.length >= 12 && d.length <= 13 ? d : null;
 }

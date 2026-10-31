@@ -1,0 +1,11 @@
+Fotos institucionais REAIS da CredFlex (com autorização de uso de imagem).
+
+1. Salve aqui os arquivos, por exemplo:
+   fachada.jpg      -> fachada do escritório (horizontal, mín. 2000 px)
+   atendimento.jpg  -> atendimento real no escritório (mín. 1600 px)
+   equipe.jpg       -> equipe (horizontal 3:2)
+2. Em src/content/photos.ts, troque `src: null` pelo caminho, ex.:
+   src: "/images/institucional/fachada.jpg"
+3. Ajuste `focus` (object-position) se o recorte precisar centralizar outro ponto.
+
+A otimização (WebP/AVIF, tamanhos responsivos, lazy loading) é automática via next/image.

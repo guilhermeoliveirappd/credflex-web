@@ -39,11 +39,13 @@ export function organizationJsonLd() {
     areaServed: "BR",
   };
   if (site.legal.razaoSocial) data.legalName = site.legal.razaoSocial;
-  if (site.channels.phone) data.telephone = site.channels.phone;
+  const tel = site.channels.phone ?? site.channels.whatsapp;
+  if (tel) data.telephone = `+${tel.replace(/\D/g, "")}`;
+  if (site.channels.email) data.email = site.channels.email;
   if (site.location.street && site.location.status !== "pending") {
     data.address = {
       "@type": "PostalAddress",
-      streetAddress: site.location.street,
+      streetAddress: `${site.location.street}, ${site.location.district}`,
       addressLocality: site.location.city,
       addressRegion: site.location.state,
       postalCode: site.location.postalCode ?? undefined,

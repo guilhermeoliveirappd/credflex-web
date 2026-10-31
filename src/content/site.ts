@@ -21,15 +21,17 @@ export const site = {
     dpo: null as { name: string; email: string } | null,
   },
 
+  /** Endereço informado pela CredFlex em 31/10/2026. */
   location: {
     city: "Osvaldo Cruz",
     state: "SP",
-    street: null as string | null,
-    postalCode: null as string | null,
+    street: "Rua Fernando Costa, 495" as string | null,
+    district: "Centro",
+    postalCode: "17700-000" as string | null,
     openingHours: null as string | null,
-    mapsUrl: null as string | null,
-    status: "pending" as const,
-    note: "Cidade citada no site atual. Endereço completo, horário e fotos a confirmar.",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rua+Fernando+Costa%2C+495%2C+Centro%2C+Osvaldo+Cruz+-+SP%2C+17700-000" as string | null,
+    status: "confirmed" as "confirmed" | "pending",
+    note: "Endereço confirmado pela CredFlex. Horário de atendimento a confirmar.",
   },
 
   history: {
@@ -39,13 +41,14 @@ export const site = {
   },
 
   /**
-   * Canais oficiais. O site antigo exibia números diferentes; nenhum deles é
-   * usado aqui. Configure via variáveis de ambiente após confirmação.
+   * Canais oficiais informados pela CredFlex em 31/10/2026 (variáveis de
+   * ambiente sobrescrevem). O telefone fixo foi recebido incompleto
+   * ("(18) 3529-2…") e permanece nulo até confirmação.
    */
   channels: {
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || null,
+    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5518981605017",
     phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || null,
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || null,
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "atendimento@credflexfinanceira.com.br",
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || null,
   },
 

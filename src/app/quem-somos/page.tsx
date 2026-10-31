@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { roleFacts, site } from "@/content/site";
 import { FactText } from "@/components/brand/ReviewMark";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { photos } from "@/content/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "Quem somos",
@@ -42,10 +43,17 @@ export default function QuemSomosPage() {
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <PhotoSlot
-              alt="Fundador(a) e equipe da CredFlex"
-              brief="Foto histórica ou atual da fundação/equipe, com autorização. Horizontal."
+              src={photos.fachada.src ?? undefined}
+              alt={photos.fachada.alt}
+              brief={photos.fachada.brief}
+              focus={photos.fachada.focus}
+              sizes="(min-width: 1024px) 45vw, 100vw"
               className="aspect-[4/3] rounded-[var(--radius-md)] rounded-bl-[35%]"
             />
+            <p className="mt-4 flex items-center gap-2 text-[0.95rem] text-ink-2">
+              <span className="fbars fbars-brand" aria-hidden />
+              Nosso escritório: {site.location.street}, {site.location.district} — {site.location.city}/{site.location.state}
+            </p>
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
             <SectionHeading id="historia-title" title="Nossa história" />
