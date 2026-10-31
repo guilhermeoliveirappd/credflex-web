@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 
 export function AntiFraudBar() {
   return (
-    <div className="bg-brand-950 text-brand-100">
+    <div className="border-b border-white/10 bg-brand-950 text-brand-100">
       <div className="container-x flex min-h-10 items-center justify-center gap-2.5 py-2 text-center text-[0.84rem] leading-snug sm:justify-start sm:text-left">
         <ShieldCheck aria-hidden className="hidden h-4 w-4 flex-none text-accent-400 sm:block" strokeWidth={2} />
         <p>

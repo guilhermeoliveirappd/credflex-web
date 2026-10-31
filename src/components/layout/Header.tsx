@@ -52,7 +52,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
   return (
     <header
       className={`sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
-        scrolled ? "border-sand bg-paper/95 shadow-[0_1px_0_rgb(0_0_0/0.02),0_8px_24px_-16px_rgb(8_20_40/0.25)] backdrop-blur-md" : "border-transparent bg-paper"
+        scrolled ? "border-white/10 bg-brand-900/95 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.6)] backdrop-blur-md" : "border-transparent bg-brand-900"
       }`}
     >
       <div className="container-x flex h-[var(--header-h)] items-center gap-6">
@@ -67,8 +67,8 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               aria-expanded={menuOpen}
               aria-controls="menu-modalidades"
               onClick={() => setMenuOpen((v) => !v)}
-              className={`flex h-11 items-center gap-1.5 rounded-sm px-3 font-semibold transition-colors hover:text-brand-700 ${
-                isProductPath || menuOpen ? "text-brand-900" : "text-ink-2"
+              className={`flex h-11 items-center gap-1.5 rounded-sm px-3 font-semibold transition-colors hover:text-accent-300 ${
+                isProductPath || menuOpen ? "text-white" : "text-brand-100"
               }`}
             >
               Modalidades
@@ -117,7 +117,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               key={item.href}
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
-              className="relative flex h-11 items-center rounded-sm px-3 font-semibold text-ink-2 transition-colors hover:text-brand-700 aria-[current=page]:text-brand-900 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1.5 aria-[current=page]:after:h-[2px] aria-[current=page]:after:bg-accent-400"
+              className="relative flex h-11 items-center rounded-sm px-3 font-semibold text-brand-100 transition-colors hover:text-accent-300 aria-[current=page]:text-white aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1.5 aria-[current=page]:after:h-[2px] aria-[current=page]:after:bg-accent-400"
             >
               {item.label}
             </Link>
@@ -131,7 +131,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => track("whatsapp_click", { cta_location: "header" })}
-              className="hidden h-11 items-center rounded-sm px-3 text-[0.95rem] font-semibold text-brand-900 hover:text-brand-700 xl:flex"
+              className="hidden h-11 items-center rounded-sm px-3 text-[0.95rem] font-semibold text-brand-100 hover:text-accent-300 xl:flex"
             >
               WhatsApp oficial
             </a>
@@ -145,7 +145,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
           </Link>
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-sm text-brand-900 hover:bg-sand/60 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-sm text-white hover:bg-white/10 lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen(true)}
@@ -207,13 +207,13 @@ function MobileNavigation({
     <div id="mobile-nav" className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
       <div className="absolute inset-0 bg-brand-950/40" onClick={onClose} aria-hidden />
       <div ref={panelRef} className="absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-paper">
-        <div className="flex h-[var(--header-h)] flex-none items-center justify-between border-b border-sand px-[var(--gutter)]">
+        <div className="flex h-[var(--header-h)] flex-none items-center justify-between bg-brand-900 px-[var(--gutter)]">
           <Logo />
           <button
             type="button"
             data-autofocus
             onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-sm text-brand-900 hover:bg-sand/60"
+            className="flex h-11 w-11 items-center justify-center rounded-sm text-white hover:bg-white/10"
           >
             <X aria-hidden className="h-6 w-6" />
             <span className="sr-only">Fechar menu</span>

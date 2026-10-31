@@ -24,8 +24,8 @@ Nada abaixo foi validado pela CredFlex. Itens **[BLOQUEANTE]** impedem a publica
 
 ## Fotografia
 - [ ] Fotos reais com termo de autorização de imagem: atendimento (hero), equipe, porta-voz, ambiente, fachada, atendimento INSS (lista completa nos `brief` de cada `PhotoSlot`)
-- [ ] **[BLOQUEANTE]** HEX oficiais do roxo e do amarelo (extrair do site oficial ou do manual) → `--color-brand` e `--color-accent` em `globals.css`, seguidos de revisão de contraste e capturas
-- [ ] Monograma e logotipo oficiais em vetor
+- [x] HEX oficiais aplicados: roxo `#0A0C3C`, amarelo `#FCAA06`
+- [ ] Logotipo em vetor original (AI/SVG) para substituir a vetorização do PNG; validar a versão horizontal com o manual de marca
 
 ## Técnico
 - [ ] **[BLOQUEANTE]** `LEAD_ADAPTER=webhook` + `CRM_WEBHOOK_URL` + `CRM_WEBHOOK_SECRET`; testar com lead de teste marcado no CRM (sem dados reais)

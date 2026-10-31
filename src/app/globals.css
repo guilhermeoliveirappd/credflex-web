@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 /*
- * CredFlex — CORES DA MARCA
+ * CredFlex — CORES OFICIAIS
  * ─────────────────────────────────────────────────────────────────────────
- * Toda a paleta deriva de DUAS cores-base. Para aplicar os HEX oficiais,
- * altere apenas --color-brand (roxo institucional) e --color-accent (amarelo).
- *
- * ⚠ VALORES ATUAIS NÃO SÃO OFICIAIS. O site credflexfinanceira.com.br e os
- *   arquivos de marca não puderam ser acessados (rede bloqueada / arquivos
- *   ausentes). Ver docs/design-system.md › "Cores oficiais — pendência".
+ * Toda a paleta deriva de DUAS cores-base oficiais:
+ *   Roxo    #0A0C3C — informado pela CredFlex (31/10/2026)
+ *   Amarelo #FCAA06 — informado pela CredFlex e conferido no arquivo do
+ *                     logotipo (cor dominante dos pixels do logo)
+ * Ver docs/design-system.md › "Cores oficiais".
  */
 @theme {
-  --color-brand: #0d1f3c; /* PROVISÓRIO — substituir pelo roxo oficial */
-  --color-accent: #f4b81c; /* PROVISÓRIO — substituir pelo amarelo oficial */
+  --color-brand: #0a0c3c; /* Roxo oficial */
+  --color-accent: #fcaa06; /* Amarelo oficial */
 
   /* Escalas derivadas (não editar: seguem as bases acima) */
   --color-brand-950: color-mix(in oklab, var(--color-brand) 70%, black);
@@ -197,7 +196,8 @@
   .link-arrow:hover { background-size: 100% 1.5px; }
 
   /* Assinatura: as duas barras do F */
-  .fbars { display: inline-flex; flex-direction: column; gap: 3px; flex: none; }
+  /* Inclinação das barras igual à do F do símbolo oficial (~17°) */
+  .fbars { display: inline-flex; flex-direction: column; gap: 3px; flex: none; transform: rotate(-17deg); transform-origin: left center; }
   .fbars::before, .fbars::after { content: ""; display: block; height: 3px; background: var(--fbars, var(--color-accent-400)); border-radius: 1px; }
   .fbars-brand { --fbars: var(--color-brand-900); }
   .fbars::before { width: 22px; }

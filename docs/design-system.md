@@ -8,22 +8,30 @@
 3. **Legível para todos.** O corpo do texto tem 17 px, as áreas de toque têm no mínimo 44 px (botões com 52 px) e o contraste é AA.
 4. **Performance acima de efeito.** O movimento é feito só com CSS e respeita `prefers-reduced-motion`.
 
-## Cores oficiais — pendência
+## Cores oficiais
 
-Os HEX oficiais **ainda não foram confirmados**. Tentativas feitas em 31/10/2026:
-- `www.credflexfinanceira.com.br`: bloqueado pela política de rede do ambiente (proxy 403 / DNS);
-- Google Drive conectado: nenhum arquivo de marca da CredFlex (busca por título e texto);
-- busca na web: nenhuma fonte com as cores da marca.
+| Cor | HEX | Fonte | Token |
+|---|---|---|---|
+| Roxo | `#0A0C3C` | Informado pela CredFlex (31/10/2026) | `--color-brand` (= `brand-900`) |
+| Amarelo | `#FCAA06` | Informado pela CredFlex e **conferido no arquivo do logotipo**: é a cor dominante dos pixels do PNG oficial | `--color-accent` (= `accent-400`) |
+| Branco | `#FFFFFF` | Superfície de conteúdo | `--color-paper` |
 
-Os valores atuais são **provisórios** e não representam a marca. O briefing indica roxo + amarelo; o roxo ainda não foi aplicado porque o tom exato não foi verificado.
+As escalas `brand-100…950` e `accent-100…600` são **derivadas** das duas bases com `color-mix(in oklab, …)`. Elas não são cores oficiais adicionais, e sim tons de apoio para hover, bordas, textos secundários e estados.
 
-### Como aplicar as cores oficiais (uma linha cada)
-Em `src/app/globals.css`, bloco `@theme`:
-```css
---color-brand: #XXXXXX;  /* roxo oficial */
---color-accent: #XXXXXX; /* amarelo oficial */
-```
-Todas as escalas (`brand-100…950`, `accent-100…600`) são derivadas com `color-mix(in oklab, …)`, então botões, formulários, foco, bordas, fundos e ícones mudam juntos. Depois da troca, é obrigatório: (1) revisar o contraste dos pares da tabela abaixo; (2) rodar `npm run screenshots`; (3) ajustar o percentual da escala se o roxo oficial for muito claro ou muito escuro.
+### Contraste (WCAG 2.2)
+
+| Combinação | Razão aproximada | Uso |
+|---|---|---|
+| Roxo `#0A0C3C` sobre amarelo `#FCAA06` | ~10:1 (AAA) | Títulos, texto e botão `btn-brand` nas seções amarelas |
+| Branco sobre roxo | ~18:1 (AAA) | Títulos e texto nas seções roxas |
+| Amarelo sobre roxo | ~10:1 (AAA) | Logo, links, botão primário e destaques nas seções roxas |
+| `ink-2` sobre branco/amarelo | > 6:1 (AA) | Texto de corpo |
+| Amarelo sobre branco | ~1,9:1 ✗ | **Proibido** para texto e logo. Por isso o header é roxo |
+
+## Logotipo
+- O vetor foi gerado a partir do PNG oficial enviado (1920×1080) com potrace. A fidelidade medida contra o original foi IoU 99,56%. Os paths estão em `src/components/brand/logo-paths.ts` e a cor é herdada de `currentColor`.
+- A **versão horizontal** (símbolo à esquerda do logotipo), usada no header, mobile e rodapé, foi derivada da versão vertical oficial. **Validar com o manual de marca.** Substitua os paths pelo AI/SVG original quando ele estiver disponível.
+- O favicon (`src/app/icon.svg`) é o símbolo amarelo sobre um quadrado roxo.
 
 ## Superfícies e ritmo
 
@@ -75,9 +83,9 @@ Eyebrows e categorias acima das headlines foram **removidos**. Rótulos funciona
 
 ## Assinatura gráfica
 
-- **Monograma provisório** (`Monogram`): um arco do C aberto à direita, com haste e duas barras do F que "saem" pela abertura.
-- **O traço** (`CFPath`): o arco do C se desdobra em duas linhas paralelas que funcionam como caminho. Aparece no hero (sobre a foto, com animação de desenho), na 404, no PageHero e no CTA final.
-- **Barras do F** (`.fbars`, `.fbars-brand` sobre o amarelo): indicam o estado ativo do menu móvel, marcam cartões e formam a base do indicador de progresso do wizard.
+- **Símbolo oficial** (`Monogram`, `Logo`): vetor do logotipo enviado pela CredFlex.
+- **O traço** (`CFPath`): contorno em linha fina do símbolo oficial, usado em grande escala e recortado. Aparece no hero (envolvendo a foto, com animação de desenho), no PageHero, no CTA final e na 404.
+- **Barras do F** (`.fbars`, `.fbars-brand` sobre o amarelo), inclinadas a −17° como o F do símbolo oficial: indicam o estado ativo do menu móvel, marcam cartões e formam a base do indicador de progresso do wizard.
 - **Arco de recorte**: as fotos recebem um canto com raio de 35–42%, que ecoa o C.
 
 ## Espaçamento e grid
