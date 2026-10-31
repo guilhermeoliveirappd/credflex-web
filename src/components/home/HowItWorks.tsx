@@ -23,7 +23,7 @@ const steps = [
 export function HowItWorks({ tone = "accent" }: { tone?: "navy" | "accent" }) {
   const dark = tone === "navy";
   return (
-    <section aria-labelledby="como-funciona-title" className={`${dark ? "bg-brand-900 text-white" : "bg-accent-400 text-brand-950"} overflow-hidden py-[var(--section-y)]`}>
+    <section aria-labelledby="como-funciona-title" className={`${dark ? "noise bg-brand-900 text-white" : "bg-accent-400 text-brand-950"} overflow-hidden py-[var(--section-y)]`}>
       <div className="container-x">
         <SectionHeading
           id="como-funciona-title"
@@ -32,11 +32,12 @@ export function HowItWorks({ tone = "accent" }: { tone?: "navy" | "accent" }) {
           className="max-w-3xl"
         />
         <ol className="relative mt-16 grid gap-10 md:grid-cols-4 md:gap-6">
+          {/* conectores + itens animam separadamente: linha se desenha, etapas entram em sequência */}
           {/* O traço: linha que conecta as etapas, derivada das barras do F */}
           <span aria-hidden className={`absolute left-[19px] top-2 h-[calc(100%-1rem)] w-[2px] md:left-0 md:top-[19px] md:h-[2px] md:w-full ${dark ? "bg-white/15" : "bg-brand-900/20"}`} />
-          <span aria-hidden className={`absolute left-[19px] top-2 h-[45%] w-[2px] md:left-0 md:top-[19px] md:h-[2px] md:w-[62%] ${dark ? "bg-accent-400" : "bg-brand-900"}`} />
+          <span aria-hidden data-reveal="line" className={`absolute left-[19px] top-2 h-[45%] w-[2px] md:left-0 md:top-[19px] md:h-[2px] md:w-[62%] ${dark ? "bg-accent-400" : "bg-brand-900"}`} />
           {steps.map((s, i) => (
-            <li key={s.title} className="relative grid grid-cols-[40px_1fr] gap-5 md:block">
+            <li key={s.title} data-reveal="up" style={{ transitionDelay: `${i * 110}ms` }} className="relative grid grid-cols-[40px_1fr] gap-5 md:block">
               <span
                 className={`t-num relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-[0.95rem] font-bold ${
                   i < 3 ? (dark ? "bg-accent-400 text-brand-950" : "bg-brand-900 text-white") : dark ? "border-2 border-white/30 bg-brand-900 text-white" : "border-2 border-brand-900/40 bg-accent-400 text-brand-950"

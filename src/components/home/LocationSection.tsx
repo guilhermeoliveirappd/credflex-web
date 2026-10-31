@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, MessageCircle } from "lucide-react";
-import { CFPath } from "@/components/brand/CFPath";
 import { ReviewMark } from "@/components/brand/ReviewMark";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
+import { LocationMap } from "./LocationMap";
 import { formatPhoneDisplay, site } from "@/content/site";
 
 /** Bloco institucional de endereço e canais oficiais (dados em content/site.ts). */
@@ -63,7 +63,7 @@ export function ContactCard({ className = "", tone = "dark" }: { className?: str
   ].filter((r): r is Exclude<typeof r, "" | null | false | undefined> => !!r);
 
   return (
-    <div className={`rounded-[var(--radius-md)] p-6 sm:p-9 ${dark ? "border border-white/10 bg-brand-900" : "bg-white ring-1 ring-sand"} ${className}`}>
+    <div className={`rounded-[var(--radius-md)] p-6 sm:p-9 ${dark ? "noise border border-white/10 bg-brand-900" : "bg-white ring-1 ring-sand"} ${className}`}>
       <dl className={`divide-y ${dark ? "divide-white/10" : "divide-sand"}`}>
         {rows.map(({ icon: Icon, label, body }) => (
           <div key={label} className="grid grid-cols-[2.75rem_1fr] gap-x-4 py-5 first:pt-0 last:pb-0">
@@ -89,13 +89,13 @@ export function ContactCard({ className = "", tone = "dark" }: { className?: str
 }
 
 export function LocationSection() {
-  const { location } = site;
+  const { location, channels } = site;
+  const wa = channels.whatsapp?.replace(/\D/g, "");
   return (
-    <section aria-labelledby="local-title" className="relative overflow-hidden bg-brand-950 py-[var(--section-y)] text-white">
-      <CFPath className="pointer-events-none absolute -bottom-[30%] -left-[12%] w-[52%] opacity-[0.12]" stroke="var(--color-accent-400)" weight={1.2} />
-      <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center">
-        <div className="lg:col-span-6">
-          <h2 id="local-title" className="t-h1 text-white">
+    <section aria-labelledby="local-title" className="noise overflow-hidden bg-brand-950 py-[var(--section-y)] text-white">
+      <div className="container-x grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="flex flex-col lg:col-span-5">
+          <h2 id="local-title" data-reveal="title" className="t-h1 text-white">
             {location.city},
             <br />
             <span className="text-accent-400">São Paulo.</span>
@@ -104,19 +104,52 @@ export function LocationSection() {
             Estamos no centro de {location.city}, na {location.street?.split(",")[0]}. Venha conversar pessoalmente com a
             equipe, sem pressa e com todas as explicações — e traga quem quiser junto.
           </p>
+          <dl data-reveal="stagger" className="mt-8 space-y-4 border-t border-white/12 pt-7">
+            <div className="flex gap-4">
+              <dt className="sr-only">Endereço</dt>
+              <MapPin aria-hidden className="mt-1 h-5 w-5 flex-none text-accent-400" />
+              <dd className="text-[1.02rem] leading-relaxed">
+                {location.street} — {location.district}
+                <br />
+                <span className="text-brand-300">
+                  {location.city} – {location.state} · CEP {location.postalCode}
+                </span>
+              </dd>
+            </div>
+            {wa && (
+              <div className="flex gap-4">
+                <dt className="sr-only">Telefone e WhatsApp</dt>
+                <MessageCircle aria-hidden className="mt-1 h-5 w-5 flex-none text-accent-400" />
+                <dd>
+                  <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer" className="t-num text-[1.02rem] font-semibold underline-offset-4 hover:text-accent-300 hover:underline">
+                    {formatPhoneDisplay(channels.whatsapp!)}
+                  </a>{" "}
+                  <span className="text-[0.92rem] text-brand-300">WhatsApp e telefone</span>
+                </dd>
+              </div>
+            )}
+            {channels.email && (
+              <div className="flex gap-4">
+                <dt className="sr-only">E-mail</dt>
+                <Mail aria-hidden className="mt-1 h-5 w-5 flex-none text-accent-400" />
+                <dd>
+                  <a href={`mailto:${channels.email}`} className="break-all text-[1.02rem] font-semibold underline-offset-4 hover:text-accent-300 hover:underline">
+                    {channels.email}
+                  </a>
+                </dd>
+              </div>
+            )}
+          </dl>
           <div className="mt-9 flex flex-col gap-3 xs:flex-row xs:flex-wrap">
             <WhatsAppCTA location="location_section" label="Falar no WhatsApp" variant="primary" />
-            {location.mapsUrl && (
-              <a href={location.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-white">
-                Como chegar <ArrowUpRight aria-hidden className="h-4 w-4" />
-              </a>
-            )}
+            <Link href="/quem-somos" className="btn btn-ghost text-white">
+              Conhecer a CredFlex
+            </Link>
           </div>
-          <Link href="/quem-somos" className="link-arrow mt-7 text-accent-300">
-            Conhecer a CredFlex
-          </Link>
         </div>
-        <ContactCard className="lg:col-span-5 lg:col-start-8" />
+        <div data-reveal="image" className="lg:col-span-7">
+          <LocationMap className="aspect-[4/4.4] sm:aspect-[16/11] lg:aspect-auto lg:h-full lg:min-h-[520px]" />
+        </div>
       </div>
     </section>
   );

@@ -29,7 +29,7 @@ export default function ContatoPage() {
             </p>
           </div>
           <div className="flex flex-col gap-6 lg:col-span-5">
-            <div className="flex flex-col justify-between rounded-[var(--radius-md)] bg-brand-900 p-8 text-white sm:p-10">
+            <div className="flex flex-col justify-between noise rounded-[var(--radius-md)] bg-brand-900 p-8 text-white sm:p-10">
               <div>
                 <h2 className="t-h3">Quer conhecer as opções de crédito?</h2>
                 <p className="mt-3 text-brand-100">

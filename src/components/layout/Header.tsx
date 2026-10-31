@@ -51,7 +51,7 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
+      className={`noise sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
         scrolled ? "border-white/10 bg-brand-900/95 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.6)] backdrop-blur-md" : "border-transparent bg-brand-900"
       }`}
     >
@@ -76,8 +76,11 @@ export function Header({ whatsappHref }: { whatsappHref: string | null }) {
             </button>
             <div
               id="menu-modalidades"
-              hidden={!menuOpen}
-              className="absolute left-0 top-[calc(100%+12px)] w-[640px] overflow-hidden rounded-md border border-sand bg-white shadow-[0_24px_60px_-24px_rgb(8_20_40/0.35)]"
+              inert={!menuOpen}
+              aria-hidden={!menuOpen}
+              className={`absolute left-0 top-[calc(100%+12px)] w-[640px] origin-top-left overflow-hidden rounded-md border border-sand bg-white shadow-[0_24px_60px_-24px_rgb(10_12_60/0.4)] transition-[opacity,transform,visibility] duration-300 ease-[var(--ease-out)] ${
+                menuOpen ? "visible translate-y-0 scale-100 opacity-100" : "invisible -translate-y-2 scale-[0.98] opacity-0"
+              }`}
             >
               <div className="grid grid-cols-[1.25fr_1fr]">
                 {productMenu.map((group, gi) => (
@@ -205,9 +208,9 @@ function MobileNavigation({
 
   return (
     <div id="mobile-nav" className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
-      <div className="absolute inset-0 bg-brand-950/40" onClick={onClose} aria-hidden />
-      <div ref={panelRef} className="absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-paper">
-        <div className="flex h-[var(--header-h)] flex-none items-center justify-between bg-brand-900 px-[var(--gutter)]">
+      <div className="anim-fade absolute inset-0 bg-brand-950/50 backdrop-blur-[2px]" onClick={onClose} aria-hidden />
+      <div ref={panelRef} className="anim-sheet absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-paper shadow-[-20px_0_60px_-20px_rgb(0_0_0/0.5)]">
+        <div className="noise flex h-[var(--header-h)] flex-none items-center justify-between bg-brand-900 px-[var(--gutter)]">
           <Logo />
           <button
             type="button"

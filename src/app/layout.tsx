@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CookieConsent } from "@/components/privacy/CookieConsent";
 import { CtaTracker } from "@/components/ui/CtaTracker";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { site } from "@/content/site";
 import { buildWhatsappUrl } from "@/lib/leads/whatsapp";
 import { JsonLd, organizationJsonLd } from "@/lib/seo/metadata";
@@ -46,8 +47,10 @@ const consentDefault = `window.dataLayer=window.dataLayer||[];function gtag(){da
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${display.variable} ${sans.variable}`}>
+    <html lang="pt-BR" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
+        {/* Marca JS ativo antes da primeira pintura (estados iniciais das animações de scroll) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         {process.env.NEXT_PUBLIC_GTM_ID && <script dangerouslySetInnerHTML={{ __html: consentDefault }} />}
       </head>
       <body>
@@ -65,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieConsent />
         <CtaTracker />
+        <ScrollReveal />
         <JsonLd data={organizationJsonLd()} />
       </body>
     </html>

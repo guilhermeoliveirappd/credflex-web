@@ -42,6 +42,10 @@ Nada abaixo foi validado pela CredFlex. Itens **[BLOQUEANTE]** impedem a publica
 - [ ] Teste manual com leitor de tela (NVDA/VoiceOver) e navegação por teclado no wizard
 - [ ] Teste em aparelho Android modesto real
 
+## Mapa
+- [ ] Conferir em produção se o marcador do Google Maps cai exatamente na Rua Fernando Costa, 495. A busca usa "CredFlex, Rua Fernando Costa, 495, Centro, Osvaldo Cruz - SP, 17700-000"; o google.com estava bloqueado no ambiente de desenvolvimento, então isso não pôde ser verificado lá. Se houver um Perfil da Empresa no Google, trocar a busca pelo `place_id` ou pela URL de incorporação oficial do perfil.
+- [ ] Classificação do mapa (conteúdo de terceiros) na Política de Cookies
+
 ## Migração
 - [ ] **[BLOQUEANTE]** Levantar URLs de destino de campanhas ativas (Meta, Google Ads, QR codes, bio do Instagram, links de WhatsApp) e garantir redirect para cada uma
 - [ ] Conferir os 9 redirects 301 em produção

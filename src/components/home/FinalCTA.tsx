@@ -18,10 +18,10 @@ export function FinalCTA({
 }) {
   const dark = tone === "brand";
   return (
-    <section aria-labelledby="cta-final-title" className={`relative overflow-hidden py-[var(--section-y)] ${dark ? "bg-brand-900 text-white" : "bg-accent-400 text-brand-950"}`}>
+    <section aria-labelledby="cta-final-title" className={`relative overflow-hidden py-[var(--section-y)] ${dark ? "noise bg-brand-900 text-white" : "bg-accent-400 text-brand-950"}`}>
       <CFPath className="pointer-events-none absolute -right-[10%] top-1/2 hidden w-[60%] -translate-y-1/2 opacity-60 md:block" stroke={dark ? "var(--color-accent-400)" : "var(--color-brand-900)"} weight={1.4} />
       <div className="container-x relative">
-        <h2 id="cta-final-title" className="t-h1 max-w-[16ch]">
+        <h2 id="cta-final-title" data-reveal="title" className="t-h1 max-w-[16ch]">
           {title}
         </h2>
         <p className={`t-lead mt-6 max-w-[44ch] ${dark ? "text-brand-100" : "text-brand-950"}`}>{text}</p>

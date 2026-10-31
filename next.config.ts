@@ -12,7 +12,7 @@ const csp = [
   "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
   "font-src 'self'",
   "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
-  "frame-src 'self' https://www.google.com",
+  "frame-src 'self' https://www.google.com https://maps.google.com", // mapa (carregado só após clique/consentimento)
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",

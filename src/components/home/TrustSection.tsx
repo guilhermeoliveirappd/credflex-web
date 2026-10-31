@@ -31,10 +31,10 @@ export function TrustSection() {
   const { location } = site;
   const hasMilestones = milestones.some((m) => m.status === "confirmed" || showReviewMarkers);
   return (
-    <section aria-labelledby="confianca-title" className="bg-brand-900 py-[var(--section-y)] text-white">
+    <section aria-labelledby="confianca-title" className="noise bg-brand-900 py-[var(--section-y)] text-white">
       <div className="container-x">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <h2 id="confianca-title" className="t-h2 text-white lg:col-span-6">
+          <h2 id="confianca-title" data-reveal="title" className="t-h2 text-white lg:col-span-6">
             Crédito com gente de verdade por trás.
           </h2>
           <div className="lg:col-span-5 lg:col-start-8">
@@ -51,7 +51,7 @@ export function TrustSection() {
         </div>
 
         {/* Mosaico compacto: fachada em destaque + blocos com informação real */}
-        <div className="mt-12 grid grid-cols-6 gap-3 sm:gap-4 lg:h-[400px] lg:grid-cols-12 lg:grid-rows-2">
+        <div data-reveal="stagger" className="mt-12 grid grid-cols-6 gap-3 sm:gap-4 lg:h-[400px] lg:grid-cols-12 lg:grid-rows-2">
           <PhotoSlot
             src={photos.fachada.src ?? undefined}
             alt={photos.fachada.alt}

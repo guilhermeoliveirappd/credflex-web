@@ -46,7 +46,7 @@ export function TransparencyBlock() {
           </div>
         </div>
         <div className="lg:col-span-6 lg:col-start-7">
-          <ol className="divide-y divide-sand border-y border-sand">
+          <ol data-reveal="stagger" className="divide-y divide-sand border-y border-sand">
             {topics.map((t, i) => (
               <li key={t.title} className="grid gap-2 py-7 sm:grid-cols-[3rem_1fr]">
                 <span aria-hidden className="t-num text-[0.85rem] font-bold text-brand-500 sm:pt-1">

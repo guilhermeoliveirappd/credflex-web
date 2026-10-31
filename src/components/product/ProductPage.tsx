@@ -21,7 +21,7 @@ export function ProductPage({ product: p }: { product: Product }) {
   return (
     <>
       {/* PageHero — composição varia conforme a modalidade */}
-      <section aria-labelledby="produto-title" className={dark ? "bg-brand-950 text-white" : "bg-accent-400 text-brand-950"}>
+      <section aria-labelledby="produto-title" className={dark ? "noise bg-brand-950 text-white" : "bg-accent-400 text-brand-950"}>
         <div className="container-x pb-16 pt-8 lg:pb-24 lg:pt-10">
           <Breadcrumbs items={[{ name: p.name, path: `/${p.slug}` }]} tone={dark ? "light" : "dark"} />
           <div className="mt-10 grid items-center gap-12 lg:grid-cols-12">
@@ -113,12 +113,12 @@ export function ProductPage({ product: p }: { product: Product }) {
       )}
 
       {/* Como funciona — o traço conecta as etapas */}
-      <section id="como-funciona-produto" aria-labelledby="etapas-title" className="bg-brand-900 py-[var(--section-y)] text-white">
+      <section id="como-funciona-produto" aria-labelledby="etapas-title" className="noise bg-brand-900 py-[var(--section-y)] text-white">
         <div className="container-x">
           <SectionHeading id="etapas-title" tone="light" title={`${p.shortName}, passo a passo.`} />
-          <ol className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-md)] bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          <ol data-reveal="stagger" className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-md)] bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {p.steps.map((s, i) => (
-              <li key={s.title} className="bg-brand-900 p-6 sm:p-7">
+              <li key={s.title} className="noise bg-brand-900 p-6 transition-colors duration-300 hover:bg-brand-800 sm:p-7">
                 <span className="t-num font-[family-name:var(--font-display)] text-4xl font-semibold text-accent-400">{i + 1}</span>
                 <h3 className="mt-6 text-[1.15rem] font-bold text-white">{s.title}</h3>
                 <p className="mt-2 text-brand-100">{s.text}</p>
@@ -132,7 +132,7 @@ export function ProductPage({ product: p }: { product: Product }) {
       <section aria-labelledby="requisitos-title" className="bg-paper py-[var(--section-y)]">
         <div className="container-x">
           <SectionHeading id="requisitos-title" title="O que é preciso saber antes." className="max-w-3xl" />
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
+          <div data-reveal="stagger" className="mt-12 grid gap-4 lg:grid-cols-3">
             <FactList icon={<ListChecks aria-hidden className="h-5 w-5" />} title="Requisitos" facts={p.requirements} />
             <FactList icon={<FileText aria-hidden className="h-5 w-5" />} title="Documentos" facts={p.documents} />
             <FactList icon={<AlertTriangle aria-hidden className="h-5 w-5" />} title="Restrições e condições" facts={p.restrictions} tone="warn" />

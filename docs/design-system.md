@@ -146,3 +146,42 @@ Os marcadores ocultos **não** tornam o conteúdo validado: o `launch-checklist.
 
 ## Fotografia
 Registro central em `src/content/photos.ts`. Cada foto tem `alt`, especificação (`brief`) e ponto focal (`focus` → `object-position`). As imagens usam `next/image` com `object-fit: cover`, `sizes` responsivo e uma vinheta sutil em roxo na base, para integrar a foto às superfícies da marca.
+
+## Movimento (v3)
+Sem bibliotecas: CSS + IntersectionObserver (`ScrollReveal`, ~1 KB). Só `transform`, `opacity` e `clip-path`.
+
+**Intro da home** (`IntroOverlay`, ~1,7s, uma vez por sessão):
+1. **0,08–0,8s:** o símbolo oficial é desenhado em amarelo sobre o roxo (stroke-dashoffset).
+2. **0,6–0,9s:** o símbolo é preenchido.
+3. **0,92–1,64s:** o símbolo vira o recorte de uma máscara SVG, e o zoom no traço do C revela a página.
+4. **A partir de 1,15s:** a headline sobe palavra por palavra, o sublinhado de "de verdade." é desenhado, o texto e os botões entram em sequência, a foto abre por máscara com desaceleração e o contorno do símbolo é desenhado.
+
+Regras da intro:
+- **Sem bloqueio e sem layout shift:** `pointer-events: none` e `position: fixed`.
+- **Quando é pulada** (atributo `html[data-intro]`): em visitas repetidas na sessão, com `prefers-reduced-motion` e em navegação interna de volta à home.
+
+**Scroll** (`data-reveal`), uma variante por tipo de elemento:
+
+| Variante | Uso |
+|---|---|
+| `title` | Títulos com cortina de baixo para cima |
+| `stagger` | Grupos de cards e listas em sequência |
+| `image` | Mapa e fotos, com máscara que abre e zoom que desacelera |
+| `line` | Conector de "Como funciona" |
+| `up` | FAQ e etapas |
+
+Os estados iniciais só existem com `html.js`. Uma rede de segurança revela todo o conteúdo após 3s, mesmo que o JS falhe.
+
+**Microinterações:**
+- brilho que atravessa o botão no hover e elevação de 1px;
+- sublinhado progressivo nos links do rodapé;
+- cards que sobem com a barra amarela crescendo na base;
+- seletor com estado amarelo e check com "pop";
+- dropdown com fade e escala, e menu móvel deslizando da direita;
+- accordion com altura animada (`::details-content`, aplicado progressivamente);
+- check animado nas opções da pré-análise e mensagem de erro deslizando.
+
+**Movimento reduzido:** zera durações e atrasos e esconde a intro.
+
+## Textura
+A classe `.noise` aplica um film grain SVG (feTurbulence) em tile de 180px, com opacidade de 7,5% e `mix-blend-mode: screen`, atrás do conteúdo (z-index -1 em contexto isolado). Está aplicada a todas as superfícies roxas: faixa antifraude, header, seletor, institucional, localização, etapas dos produtos, CTA roxo, heros roxos, cartões roxos e rodapé.

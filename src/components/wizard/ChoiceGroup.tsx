@@ -63,7 +63,7 @@ export function ChoiceGroup({
                     checked ? "border-brand-800 bg-brand-800 text-white" : "border-sand-600 bg-white text-transparent group-hover:border-brand-500"
                   }`}
                 >
-                  <Check className="h-3.5 w-3.5" strokeWidth={3.5} />
+                  <Check className={`h-3.5 w-3.5 ${checked ? "anim-pop" : ""}`} strokeWidth={3.5} />
                 </span>
               )}
               <span className={compact ? `font-bold ${checked ? "text-brand-900" : "text-ink-2"}` : ""}>

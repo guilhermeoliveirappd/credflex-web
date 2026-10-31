@@ -67,10 +67,10 @@ export default function QuemSomosPage() {
           </div>
         </div>
       </section>
-      <section aria-labelledby="principios-title" className="bg-brand-900 py-[var(--section-y)] text-white">
+      <section aria-labelledby="principios-title" className="noise bg-brand-900 py-[var(--section-y)] text-white">
         <div className="container-x">
           <SectionHeading id="principios-title" tone="light" title="Três compromissos que orientam o atendimento." className="max-w-3xl" />
-          <ol className="mt-12 grid gap-4 md:grid-cols-3">
+          <ol data-reveal="stagger" className="mt-12 grid gap-4 md:grid-cols-3">
             {principles.map(([t, d], i) => (
               <li key={t} className="border-t-2 border-accent-400 pt-6">
                 <span className="t-num text-[0.85rem] font-bold text-accent-300">{String(i + 1).padStart(2, "0")}</span>

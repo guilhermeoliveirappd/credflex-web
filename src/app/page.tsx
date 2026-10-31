@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { IntroOverlay } from "@/components/brand/IntroOverlay";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <IntroOverlay />
       <Hero />
       <ProfileSelector />
       <ProductShowcase />
@@ -42,7 +44,9 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
-            <FAQAccordion items={homeFaq} />
+            <div data-reveal="up">
+              <FAQAccordion items={homeFaq} />
+            </div>
           </div>
         </div>
       </section>

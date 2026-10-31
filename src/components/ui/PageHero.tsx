@@ -19,7 +19,7 @@ export function PageHero({
 }) {
   const dark = tone === "navy";
   return (
-    <section aria-labelledby="page-title" className={`relative overflow-hidden ${dark ? "bg-brand-950 text-white" : tone === "accent" ? "bg-accent-400 text-brand-950" : "bg-white"}`}>
+    <section aria-labelledby="page-title" className={`relative overflow-hidden ${dark ? "noise bg-brand-950 text-white" : tone === "accent" ? "bg-accent-400 text-brand-950" : "bg-white"}`}>
       <CFPath className={`pointer-events-none absolute -right-[12%] top-0 hidden h-full w-[55%] lg:block ${dark ? "opacity-50" : "opacity-40"}`} stroke={dark ? "var(--color-accent-400)" : tone === "accent" ? "var(--color-brand-900)" : "var(--color-sand-600)"} weight={1.2} />
       <div className="container-x relative pb-16 pt-8 lg:pb-24 lg:pt-10">
         <Breadcrumbs items={[{ name: crumb, path }]} tone={dark ? "light" : "dark"} />

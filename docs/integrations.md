@@ -10,6 +10,7 @@
 | Currículos | **Validação pronta, armazenamento não configurado.** Em desenvolvimento o arquivo é validado e descartado; em produção a API devolve 503 | `app/api/carreiras/route.ts` |
 | CMS | Não adotado na 1ª entrega (ver abaixo) | `src/content/*` |
 | Rate limit | Em memória (uma instância) | `lib/security/rate-limit.ts` |
+| Google Maps (embed sem chave) | **Implementado.** Carrega só após clique em "Carregar mapa interativo", automaticamente se houver consentimento de publicidade, ou se o mapa já foi carregado antes neste navegador. Fallback: prévia com endereço e link | `components/home/LocationMap.tsx` |
 
 Nenhuma integração foi validada com credenciais reais. **Nenhum lead real foi criado.**
 

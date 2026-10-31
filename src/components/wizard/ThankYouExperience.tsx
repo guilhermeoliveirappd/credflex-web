@@ -83,7 +83,7 @@ export function ThankYouExperience() {
       </div>
 
       <aside className="lg:col-span-5">
-        <div className="rounded-[var(--radius-md)] bg-brand-900 p-7 text-white">
+        <div className="noise rounded-[var(--radius-md)] bg-brand-900 p-7 text-white">
           <p className="t-eyebrow text-accent-300">Seu protocolo</p>
           <p className="t-num mt-3 font-[family-name:var(--font-display)] text-[2.2rem] font-semibold tracking-[0.02em]">{receipt.protocol}</p>
           <p className="t-small mt-2 text-brand-300">Informe este código se falar com a equipe por outro canal.</p>
