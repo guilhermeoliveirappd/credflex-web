@@ -9,7 +9,7 @@ const errs = []; p.on("pageerror", (e) => errs.push(e.message));
 await p.goto("http://localhost:3000/", { waitUntil: "commit" });
 await p.waitForSelector("#hero-title", { state: "attached" });
 const t0 = Date.now();
-for (const t of [150, 450, 800, 1050, 1250, 1500, 1900, 2600]) {
+for (const t of [120, 350, 600, 800, 950, 1100, 1350, 2000]) {
   const wait = t - (Date.now() - t0); if (wait > 0) await p.waitForTimeout(wait);
   await p.screenshot({ path: `${out}/t${t}-${w}.png` });
 }

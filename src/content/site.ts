@@ -54,7 +54,7 @@ export const site = {
   },
 
   /** Crédito de desenvolvimento no rodapé. `url` fica nulo até ser informado. */
-  credits: { name: "Max Performance Growth", url: null as string | null },
+  credits: { name: "NESX Performance & Growth", url: null as string | null },
 
   antiFraudMessage: "A CredFlex não solicita depósitos antecipados para liberar crédito.",
 } as const;

@@ -120,6 +120,18 @@
   @media (max-width: 479px) {
     .support-text, [data-support] { text-align: left; }
   }
+  /* Aviso regulatório do rodapé: justificado, centralizado, sem hifenização */
+  .footer-legal {
+    text-align: justify;
+    text-align-last: center;
+    hyphens: none;
+    -webkit-hyphens: none;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+  @media (max-width: 767px) {
+    .footer-legal { text-align: center; }
+  }
   a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 }
 
@@ -281,9 +293,10 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
- * INTRO DA HOME — "inversão" (IntroOverlay.tsx)
+ * INTRO DA HOME — "CF Brand Reveal" (IntroOverlay.tsx), ~1,3s
  * html[data-intro]: play → reveal → done | skip (sessão repetida/movimento reduzido)
- * Só formas sólidas do símbolo; nenhum stroke.
+ * A tela roxa se recolhe até virar a placa roxa do hero; o símbolo pousa nela.
+ * Só formas sólidas, escala uniforme, transform + clip-path.
  * ═════════════════════════════════════════════════════════════════════ */
 .cf-intro { display: none; }
 html[data-intro="play"] .cf-intro, html[data-intro="reveal"] .cf-intro {
@@ -292,57 +305,45 @@ html[data-intro="play"] .cf-intro, html[data-intro="reveal"] .cf-intro {
   inset: 0;
   z-index: 200;
   pointer-events: none;
-  /* Rede de segurança: se o JS não rodar, a abertura some sozinha */
-  animation: cf-intro-out 0.4s 2.6s forwards;
+  /* Rede de segurança: se o JS não rodar, a abertura sai sozinha */
+  animation: cf-intro-out 0.35s 2.2s forwards;
 }
-.cf-intro-bg { position: absolute; inset: 0; background: var(--color-brand-900); }
+.cf-intro-bg { inset: 0; background: var(--color-brand-900); will-change: clip-path; }
 .cf-intro-stage { position: absolute; inset: 0; display: grid; place-items: center; }
-.cf-intro-stage > * { grid-area: 1 / 1; width: min(34vmin, 230px); }
-.cf-intro-mark { color: var(--color-accent-400); transform-origin: center; will-change: transform; }
-.cf-intro-mark svg { animation: cf-spiral 0.78s 0.16s cubic-bezier(0.2, 0.9, 0.1, 1) both; }
-.cf-intro-echo { color: var(--color-brand-700); }
-.cf-intro-echo-1 { color: var(--color-brand-800); }
-.cf-intro-echo svg { animation: cf-echo 0.72s cubic-bezier(0.2, 0.9, 0.1, 1) both; }
-.cf-intro-echo-1 svg { animation-delay: 0.08s; }
-.cf-intro.is-leaving .cf-intro-echo { opacity: 0; transition: opacity 0.2s; }
-
-@keyframes cf-spiral {
-  from { clip-path: circle(0% at 44% 52%); transform: rotate(-70deg) scale(0.7); }
-  to { clip-path: circle(75% at 44% 52%); transform: none; }
+.cf-intro-mark { width: min(34vmin, 212px); color: var(--color-accent-400); transform-origin: center; will-change: transform; }
+/* Entrada vetorial: máscara circular que gira a partir do centro do C */
+.cf-intro-mark svg { animation: cf-mark-in 0.62s 0.04s cubic-bezier(0.2, 0.9, 0.1, 1) both; }
+@keyframes cf-mark-in {
+  from { clip-path: circle(0% at 46% 51%); transform: rotate(-55deg) scale(0.88); }
+  to { clip-path: circle(72% at 46% 51%); transform: none; }
 }
-@keyframes cf-echo {
-  0% { clip-path: circle(0% at 44% 52%); transform: rotate(-120deg) scale(0.5); }
-  70% { clip-path: circle(75% at 44% 52%); transform: rotate(-12deg) scale(1.04); }
-  100% { clip-path: circle(75% at 44% 52%); transform: none; }
-}
-@keyframes cf-intro-out { to { opacity: 0; visibility: hidden; } }
+@keyframes cf-intro-out { to { visibility: hidden; clip-path: inset(0 0 100% 0); } }
 
-/* Coreografia do hero */
+/* Hero */
 .hero-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .hero-word > span { display: inline-block; }
 
-/* Durante a abertura: hero escondido (o símbolo do hero é o destino da viagem) */
-html[data-intro="play"] .hero-word > span { transform: translateY(105%); animation: hero-rise 0.9s 2.6s forwards; }
-html[data-intro="play"] .hero-in { opacity: 0; animation: hero-in 0.6s 2.7s forwards; }
-html:is([data-intro="play"], [data-intro="reveal"]) .hero-mark { opacity: 0; }
+/* Durante a abertura o hero aguarda; a placa e o símbolo são entregues pela abertura */
+html[data-intro="play"] .hero-word > span { transform: translateY(105%); animation: hero-rise 0.8s 2.2s forwards; }
+html[data-intro="play"] .hero-in { opacity: 0; animation: hero-in 0.5s 2.3s forwards; }
+html:is([data-intro="play"], [data-intro="reveal"]) :is(.hero-panel, .hero-mark) { visibility: hidden; }
 
 @media (prefers-reduced-motion: no-preference) {
   html:is([data-intro="reveal"], [data-intro="skip"], [data-intro="done"]) .hero-word > span {
     transform: translateY(105%);
-    animation: hero-rise 0.95s calc(var(--i, 0) * 70ms) cubic-bezier(0.2, 0.9, 0.1, 1) forwards;
+    animation: hero-rise 0.85s calc(var(--i, 0) * 80ms) cubic-bezier(0.2, 0.9, 0.1, 1) forwards;
   }
   html:is([data-intro="reveal"], [data-intro="skip"], [data-intro="done"]) .hero-in {
-    opacity: 0; transform: translateY(14px);
-    animation: hero-in 0.7s var(--d, 0ms) var(--ease-out) forwards;
+    opacity: 0; transform: translateY(12px);
+    animation: hero-in 0.6s var(--d, 0ms) var(--ease-out) forwards;
   }
-  /* Visita repetida: o símbolo do hero gira até o lugar, sem a abertura */
-  html[data-intro="skip"] .hero-mark { animation: hero-mark-in 1.1s 0.1s cubic-bezier(0.2, 0.9, 0.1, 1) both; }
-  html:is([data-intro="skip"], [data-intro="done"]) .hero-mark-echo { animation: hero-echo-in 1.4s 0.25s cubic-bezier(0.2, 0.9, 0.1, 1) both; }
+  /* Visita repetida (sem abertura): a placa abre por recorte e o símbolo gira até o lugar */
+  html[data-intro="skip"] .hero-panel { animation: hero-panel-in 0.9s 0.05s cubic-bezier(0.83, 0, 0.17, 1) both; }
+  html[data-intro="skip"] .hero-mark { animation: cf-mark-in 0.8s 0.35s cubic-bezier(0.2, 0.9, 0.1, 1) both; }
 }
 @keyframes hero-rise { to { transform: none; } }
 @keyframes hero-in { to { opacity: 1; transform: none; } }
-@keyframes hero-mark-in { from { opacity: 0; transform: rotate(-24deg) scale(0.86); } to { opacity: 1; transform: none; } }
-@keyframes hero-echo-in { from { opacity: 0; transform: rotate(-30deg); } to { opacity: 1; transform: none; } }
+@keyframes hero-panel-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 
 /* ═══════════════════════════════════════════════════════════════════════
  * SCROLL REVEAL — variantes distintas por tipo de elemento.

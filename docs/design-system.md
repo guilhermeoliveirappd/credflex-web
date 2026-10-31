@@ -215,3 +215,18 @@ Comportamento:
 - **Área legal:** centralizada, com 0,8rem e no máximo 72ch.
 - **Linha final:** © + CNPJ à esquerda, "Desenvolvido por Max Performance Growth" à direita. O link fica em `site.credits.url`, hoje nulo.
 - **Endereço:** removido da base do rodapé.
+
+## Revisão v5 (hero, abertura, rodapé)
+- **Headline:** "Crédito, sem rodeios.", em 2 linhas fixas e escala reduzida. As alternativas avaliadas estão em `Hero.tsx`.
+- **Placa da marca:** um tile roxo com textura e o símbolo amarelo a 44% da largura. O canto superior esquerdo é amplo (raio de 140px), em eco ao arco do C. É o destino da abertura.
+- **Abertura "CF Brand Reveal" (~1,3s):**
+  1. **0–0,6s:** o símbolo entra por uma máscara circular que gira a partir do centro do C.
+  2. **0,56–1,3s:** a tela roxa se recolhe por `clip-path: inset(... round <raios reais da placa>)` até coincidir com a placa; o símbolo pousa nela com escala uniforme.
+
+  Não há fade, strokes ou elementos extras; a abertura vira o próprio hero.
+- **Rodapé:**
+  - cerca de 350px de altura no desktop;
+  - colunas Institucional (com Modalidades em acordeão) e Atendimento (Ajuda e Contato);
+  - sem telefone, e-mail ou endereço, que ficam na seção de localização e na página Contato;
+  - aviso regulatório em 2 linhas no desktop (`.footer-legal`: justificado, última linha centralizada, sem hifenização);
+  - crédito "NESX Performance & Growth" (`site.credits.url`, ainda nulo).

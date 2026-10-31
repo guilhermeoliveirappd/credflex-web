@@ -4,85 +4,90 @@ import { useEffect, useRef } from "react";
 import { SYMBOL_PATH, SYMBOL_VIEWBOX } from "./logo-paths";
 
 /**
- * Abertura da home — "inversão": o símbolo oficial entra em espiral (três
- * camadas do próprio símbolo convergindo), depois viaja até o símbolo gigante
- * do hero enquanto inverte de amarelo para roxo e a cortina roxa sobe,
- * revelando o amarelo. Nenhum traço/stroke: só a forma sólida do símbolo.
- *
- * Fase 1 (0–0,8s) é CSS puro e começa na primeira pintura (HTML do servidor).
- * Fase 2 (~0,85–1,65s) usa as coordenadas reais do [data-hero-mark] (FLIP).
+ * "CF Brand Reveal" — a abertura É o hero.
+ * 1. (CSS, 0–0,55s) Tela roxa; o símbolo oficial entra por uma máscara
+ *    circular que gira a partir do centro do C.
+ * 2. (JS, ~0,55–1,3s) O fundo roxo se recolhe por recorte geométrico
+ *    (clip-path inset arredondado) até coincidir com a placa roxa do hero,
+ *    e o símbolo viaja/escala até a sua posição final dentro dela. O amarelo
+ *    da página aparece em volta. Nada some com fade: tudo vira o próprio hero.
+ * Sem strokes, sem distorção (escala uniforme), só transform/clip-path.
  * Sem JS, o CSS encerra a abertura sozinho. Uma vez por sessão.
  */
 const gate = `(function(){try{var d=document.documentElement;var r=matchMedia('(prefers-reduced-motion: reduce)').matches;if(r||sessionStorage.getItem('cf_intro')){d.dataset.intro='skip';return}sessionStorage.setItem('cf_intro','1');d.dataset.intro='play'}catch(e){}})();`;
 
-const EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
+const EASE = "cubic-bezier(0.83, 0, 0.17, 1)";
 
 export function IntroOverlay() {
-  const rootRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const html = document.documentElement;
-    const root = rootRef.current;
     const mark = markRef.current;
     const bg = bgRef.current;
-    if (html.dataset.intro !== "play" || !root || !mark || !bg) return;
+    if (html.dataset.intro !== "play" || !mark || !bg) return;
 
     let cancelled = false;
-    const finish = () => {
-      html.dataset.intro = "done";
-    };
-    // Fase 2 começa ~0,85s após a navegação (ou já, se a hidratação atrasou).
-    const wait = Math.max(0, 850 - performance.now());
-    const t = setTimeout(() => {
-      if (cancelled) return;
-      const target = document.querySelector<HTMLElement>("[data-hero-mark]");
-      if (!target || typeof mark.animate !== "function") return finish();
-      const from = mark.getBoundingClientRect();
-      const to = target.getBoundingClientRect();
-      const dx = to.left + to.width / 2 - (from.left + from.width / 2);
-      const dy = to.top + to.height / 2 - (from.top + from.height / 2);
-      const k = to.width / from.width;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const start = Math.max(0, 560 - performance.now());
 
-      root.classList.add("is-leaving");
-      const opts: KeyframeAnimationOptions = { duration: 820, easing: EASE, fill: "forwards" };
-      mark.animate(
-        [
-          { transform: "translate(0, 0) scale(1)", color: "var(--color-accent-400)" },
-          { transform: `translate(${dx}px, ${dy}px) scale(${k})`, color: "var(--color-brand-900)" },
-        ],
-        opts,
-      );
-      bg.animate([{ clipPath: "inset(0 0 0 0)" }, { clipPath: "inset(0 0 100% 0)" }], { ...opts, duration: 760, delay: 60 });
-      // Texto do hero entra enquanto o símbolo ainda viaja
-      setTimeout(() => !cancelled && (html.dataset.intro = "reveal"), 260);
-      setTimeout(() => !cancelled && finish(), 840);
-    }, wait);
+    timers.push(
+      setTimeout(() => {
+        if (cancelled) return;
+        const panel = document.querySelector<HTMLElement>("[data-hero-panel]");
+        const target = document.querySelector<HTMLElement>("[data-hero-mark]");
+        if (!panel || !target || typeof mark.animate !== "function") {
+          html.dataset.intro = "done";
+          return;
+        }
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const p = panel.getBoundingClientRect();
+        // Raios reais da placa (canto superior esquerdo amplo, eco do arco do C)
+        const cs = getComputedStyle(panel);
+        const radius = [cs.borderTopLeftRadius, cs.borderTopRightRadius, cs.borderBottomRightRadius, cs.borderBottomLeftRadius].join(" ");
+        const from = mark.getBoundingClientRect();
+        const to = target.getBoundingClientRect();
+        const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+        const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+        const k = to.width / from.width; // escala uniforme: sem distorção
+
+        const D = 720;
+        bg.animate(
+          [
+            { clipPath: "inset(0px 0px 0px 0px round 0px)" },
+            { clipPath: `inset(${p.top}px ${vw - p.right}px ${vh - p.bottom}px ${p.left}px round ${radius})` },
+          ],
+          { duration: D, easing: EASE, fill: "forwards" },
+        );
+        mark.animate([{ transform: "translate(0,0) scale(1)" }, { transform: `translate(${dx}px, ${dy}px) scale(${k})` }], {
+          duration: D,
+          easing: EASE,
+          fill: "forwards",
+        });
+        // Texto entra enquanto a placa se forma
+        timers.push(setTimeout(() => !cancelled && (html.dataset.intro = "reveal"), 240));
+        timers.push(setTimeout(() => !cancelled && (html.dataset.intro = "done"), D + 20));
+      }, start),
+    );
 
     return () => {
       cancelled = true;
-      clearTimeout(t);
+      timers.forEach(clearTimeout);
     };
   }, []);
-
-  const shape = (
-    <svg viewBox={SYMBOL_VIEWBOX} className="h-auto w-full" aria-hidden focusable="false">
-      <path d={SYMBOL_PATH} fill="currentColor" fillRule="evenodd" />
-    </svg>
-  );
 
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: gate }} />
-      <div ref={rootRef} className="cf-intro" aria-hidden>
+      <div className="cf-intro" aria-hidden>
         <div ref={bgRef} className="cf-intro-bg noise absolute" />
         <div className="cf-intro-stage">
-          {/* Camadas-eco: o próprio símbolo em tons do roxo, convergindo em espiral */}
-          <div className="cf-intro-echo cf-intro-echo-2">{shape}</div>
-          <div className="cf-intro-echo cf-intro-echo-1">{shape}</div>
           <div ref={markRef} className="cf-intro-mark">
-            {shape}
+            <svg viewBox={SYMBOL_VIEWBOX} className="h-auto w-full" focusable="false">
+              <path d={SYMBOL_PATH} fill="currentColor" fillRule="evenodd" />
+            </svg>
           </div>
         </div>
       </div>

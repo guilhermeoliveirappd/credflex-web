@@ -97,13 +97,13 @@ test("hero com um único CTA principal", async ({ page }) => {
   await consent(page);
   await page.goto("/");
   const hero = page.locator("section[aria-labelledby='hero-title']");
-  await expect(hero.getByRole("heading", { level: 1 })).toHaveText(/Crédito com gente de verdade\./);
+  await expect(hero.getByRole("heading", { level: 1 })).toHaveText(/Crédito,\s*sem rodeios\./);
   await expect(hero.getByRole("link")).toHaveCount(1);
   await hero.getByRole("link", { name: /Consultar meu crédito/ }).click();
   await expect(page).toHaveURL(/\/simulacao$/);
 });
 
-test("rodapé: modalidades em acordeão, e-mail em uma linha, sem endereço", async ({ page }) => {
+test("rodapé compacto: modalidades em acordeão, sem contatos repetidos", async ({ page }) => {
   await consent(page);
   await page.goto("/");
   const footer = page.locator("footer");
@@ -111,12 +111,16 @@ test("rodapé: modalidades em acordeão, e-mail em uma linha, sem endereço", as
   await expect(link).toBeHidden();
   await footer.getByText("Modalidades", { exact: true }).click();
   await expect(link).toBeVisible();
-  const email = footer.getByRole("link", { name: "atendimento@credflexfinanceira.com.br" });
-  const box = await email.boundingBox();
-  expect(box!.height).toBeLessThan(44); // 1 linha ≈ 32px (24 + padding); 2 linhas ≈ 56px
+  await expect(footer).not.toContainText("atendimento@credflexfinanceira.com.br");
+  await expect(footer).not.toContainText("98160-5017");
   await expect(footer).not.toContainText("Rua Fernando Costa");
+  // Contatos continuam na seção de localização
+  const local = page.locator("section[aria-labelledby='local-title']");
+  await expect(local).toContainText("atendimento@credflexfinanceira.com.br");
+  await expect(local).toContainText("(18) 98160-5017");
+  await expect(local).toContainText("Rua Fernando Costa, 495");
   await expect(footer).toContainText("CNPJ 23.014.866/0001-57");
-  await expect(footer).toContainText("Desenvolvido por Max Performance Growth");
+  await expect(footer).toContainText("Desenvolvido por NESX Performance & Growth");
 });
 
 test("textos sem hifenização automática", async ({ page }) => {
@@ -124,6 +128,17 @@ test("textos sem hifenização automática", async ({ page }) => {
   await page.goto("/quem-somos");
   const hyph = await page.evaluate(() => [...document.querySelectorAll("p, dd, [data-support]")].filter((e) => getComputedStyle(e).hyphens === "auto").length);
   expect(hyph).toBe(0);
+});
+
+test("aviso regulatório do rodapé em até 2 linhas no desktop, sem hifenização", async ({ page, isMobile }) => {
+  test.skip(!!isMobile, "regra de 2 linhas vale para desktop");
+  await consent(page);
+  await page.goto("/");
+  const p = page.locator("footer .footer-legal");
+  const lines = await p.evaluate((el) => Math.round(el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight)));
+  expect(lines).toBeLessThanOrEqual(2);
+  await expect(p).toHaveCSS("hyphens", "none");
+  await expect(p).toHaveCSS("text-align", "justify");
 });
 
 test("cards de modalidade compactos levam à página interna", async ({ page }) => {
